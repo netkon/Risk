@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/Ready.gd" type="Script" id=1]
+[ext_resource path="res://fonts/montreal/Montreal.tres" type="DynamicFont" id=2]
+[ext_resource path="res://fonts/montreal/Montreal-Regular.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 26
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 26
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 26
+font_data = ExtResource( 3 )
+
+[node name="PreGame" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Panel" type="Panel" parent="."]
+self_modulate = Color( 0, 0.356863, 1, 1 )
+margin_left = 1.74957
+margin_top = 1.74951
+margin_right = 1228.75
+margin_bottom = 629.75
+
+[node name="ReadyButton" type="Button" parent="Panel"]
+margin_left = 27.0
+margin_top = 537.0
+margin_right = 246.0
+margin_bottom = 601.0
+custom_fonts/font = ExtResource( 2 )
+text = "Ready"
+
+[node name="StartGame" type="Button" parent="Panel"]
+visible = false
+margin_left = 266.0
+margin_top = 537.0
+margin_right = 485.0
+margin_bottom = 601.0
+custom_fonts/font = ExtResource( 2 )
+text = "Start Game"
+
+[node name="LeaveLobby" type="Button" parent="Panel"]
+margin_left = 981.0
+margin_top = 537.0
+margin_right = 1200.0
+margin_bottom = 601.0
+custom_fonts/font = ExtResource( 2 )
+text = "Back"
+
+[node name="PlayersReady" type="Label" parent="Panel"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 249.0
+margin_bottom = 43.0
+custom_fonts/font = SubResource( 1 )
+text = "Players ready : 0/1"
+
+[node name="Timer" type="Timer" parent="Panel"]
+one_shot = true
+
+[node name="TimeLeft" type="Label" parent="Panel/Timer"]
+visible = false
+margin_left = 730.0
+margin_top = 11.75
+margin_right = 752.0
+margin_bottom = 44.75
+custom_fonts/font = SubResource( 2 )
+
+[node name="Label" type="Label" parent="Panel/Timer/TimeLeft"]
+margin_left = 40.0
+margin_right = 480.0
+margin_bottom = 33.0
+custom_fonts/font = SubResource( 3 )
+text = "Seconds left until the game starts"

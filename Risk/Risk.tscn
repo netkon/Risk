@@ -1,0 +1,456 @@
+[gd_scene load_steps=87 format=2]
+
+[ext_resource path="res://Scripts/Risk.gd" type="Script" id=1]
+[ext_resource path="res://Textures/RiskMapTextures/GameMap.png" type="Texture" id=2]
+[ext_resource path="res://Textures/RiskMapTextures/Afghanistan.png" type="Texture" id=3]
+[ext_resource path="res://Textures/RiskMapTextures/AfricadoNorte.png" type="Texture" id=4]
+[ext_resource path="res://Textures/RiskMapTextures/AfricaOriental.png" type="Texture" id=5]
+[ext_resource path="res://Textures/RiskMapTextures/AfricadoSul.png" type="Texture" id=6]
+[ext_resource path="res://Textures/RiskMapTextures/Alaska.png" type="Texture" id=7]
+[ext_resource path="res://Textures/RiskMapTextures/Alberta.png" type="Texture" id=8]
+[ext_resource path="res://Textures/RiskMapTextures/AmericaCentral.png" type="Texture" id=9]
+[ext_resource path="res://Textures/RiskMapTextures/AmericaNorte.png" type="Texture" id=10]
+[ext_resource path="res://Textures/RiskMapTextures/Argentina.png" type="Texture" id=11]
+[ext_resource path="res://Textures/RiskMapTextures/Brasil.png" type="Texture" id=12]
+[ext_resource path="res://Textures/RiskMapTextures/Congo.png" type="Texture" id=13]
+[ext_resource path="res://Textures/RiskMapTextures/Egypt.png" type="Texture" id=14]
+[ext_resource path="res://Textures/RiskMapTextures/Escandinavia.png" type="Texture" id=15]
+[ext_resource path="res://Textures/RiskMapTextures/EuropadoNorte.png" type="Texture" id=16]
+[ext_resource path="res://Textures/RiskMapTextures/EuropadoSul.png" type="Texture" id=17]
+[ext_resource path="res://Textures/RiskMapTextures/EuropaOcidental.png" type="Texture" id=18]
+[ext_resource path="res://Textures/RiskMapTextures/GreatBritain.png" type="Texture" id=19]
+[ext_resource path="res://Textures/RiskMapTextures/GreenLand.png" type="Texture" id=20]
+[ext_resource path="res://Textures/RiskMapTextures/Iakutsk.png" type="Texture" id=21]
+[ext_resource path="res://Textures/RiskMapTextures/India.png" type="Texture" id=22]
+[ext_resource path="res://Textures/RiskMapTextures/Indonesia.png" type="Texture" id=23]
+[ext_resource path="res://Textures/RiskMapTextures/Irkutsk.png" type="Texture" id=24]
+[ext_resource path="res://Textures/RiskMapTextures/Islandia.png" type="Texture" id=25]
+[ext_resource path="res://Textures/RiskMapTextures/Kamtxatka.png" type="Texture" id=26]
+[ext_resource path="res://Textures/RiskMapTextures/Madagascar.png" type="Texture" id=27]
+[ext_resource path="res://Textures/RiskMapTextures/Mongolia.png" type="Texture" id=28]
+[ext_resource path="res://Textures/RiskMapTextures/NewGuinea.png" type="Texture" id=29]
+[ext_resource path="res://Textures/RiskMapTextures/OcidentalAustralia.png" type="Texture" id=30]
+[ext_resource path="res://Textures/RiskMapTextures/Ontario.png" type="Texture" id=31]
+[ext_resource path="res://Textures/RiskMapTextures/Orient Mig.png" type="Texture" id=32]
+[ext_resource path="res://Textures/RiskMapTextures/OrientalAustralia.png" type="Texture" id=33]
+[ext_resource path="res://Textures/RiskMapTextures/Peru.png" type="Texture" id=34]
+[ext_resource path="res://Textures/RiskMapTextures/Quebec.png" type="Texture" id=35]
+[ext_resource path="res://Textures/RiskMapTextures/Siam.png" type="Texture" id=36]
+[ext_resource path="res://Textures/RiskMapTextures/Siberia.png" type="Texture" id=37]
+[ext_resource path="res://Textures/RiskMapTextures/Ucrania.png" type="Texture" id=38]
+[ext_resource path="res://Textures/RiskMapTextures/Ural.png" type="Texture" id=39]
+[ext_resource path="res://Textures/RiskMapTextures/USAE.png" type="Texture" id=40]
+[ext_resource path="res://Textures/RiskMapTextures/USAO.png" type="Texture" id=41]
+[ext_resource path="res://Textures/RiskMapTextures/Venezuela.png" type="Texture" id=42]
+[ext_resource path="res://Textures/RiskMapTextures/Xina.png" type="Texture" id=43]
+[ext_resource path="res://Textures/Bitmaps/Kamtxatka.png" type="BitMap" id=44]
+[ext_resource path="res://Textures/Bitmaps/Quebec.png" type="BitMap" id=45]
+[ext_resource path="res://Textures/Bitmaps/Ural.png" type="BitMap" id=46]
+[ext_resource path="res://Textures/Bitmaps/Congo.png" type="BitMap" id=47]
+[ext_resource path="res://Textures/Bitmaps/AmericaCentral.png" type="BitMap" id=48]
+[ext_resource path="res://Textures/Bitmaps/EuropaOcidental.png" type="BitMap" id=49]
+[ext_resource path="res://Textures/Bitmaps/Ucrania.png" type="BitMap" id=50]
+[ext_resource path="res://Textures/Bitmaps/Egypt.png" type="BitMap" id=51]
+[ext_resource path="res://Textures/Bitmaps/GreenLand.png" type="BitMap" id=52]
+[ext_resource path="res://Textures/Bitmaps/AmericaNorte.png" type="BitMap" id=53]
+[ext_resource path="res://Textures/Bitmaps/Iakutsk.png" type="BitMap" id=54]
+[ext_resource path="res://Textures/Bitmaps/Irkutsk.png" type="BitMap" id=55]
+[ext_resource path="res://Textures/Bitmaps/Indonesia.png" type="BitMap" id=56]
+[ext_resource path="res://Textures/Bitmaps/EuropadoSul.png" type="BitMap" id=57]
+[ext_resource path="res://Textures/Bitmaps/Mongolia.png" type="BitMap" id=58]
+[ext_resource path="res://Textures/Bitmaps/OcidentalAustralia.png" type="BitMap" id=59]
+[ext_resource path="res://Textures/Bitmaps/NewGuinea.png" type="BitMap" id=60]
+[ext_resource path="res://Textures/Bitmaps/Siberia.png" type="BitMap" id=61]
+[ext_resource path="res://Textures/Bitmaps/OrientalAustralia.png" type="BitMap" id=62]
+[ext_resource path="res://Textures/Bitmaps/India.png" type="BitMap" id=63]
+[ext_resource path="res://Textures/Bitmaps/Siam.png" type="BitMap" id=64]
+[ext_resource path="res://Textures/Bitmaps/USAO.png" type="BitMap" id=65]
+[ext_resource path="res://Textures/Bitmaps/Escandinavia.png" type="BitMap" id=66]
+[ext_resource path="res://Textures/Bitmaps/Argentina.png" type="BitMap" id=67]
+[ext_resource path="res://Textures/Bitmaps/Ontario.png" type="BitMap" id=68]
+[ext_resource path="res://Textures/Bitmaps/EuropadoNorte.png" type="BitMap" id=69]
+[ext_resource path="res://Textures/Bitmaps/Islandia.png" type="BitMap" id=70]
+[ext_resource path="res://Textures/Bitmaps/Peru.png" type="BitMap" id=71]
+[ext_resource path="res://Textures/Bitmaps/Madagascar.png" type="BitMap" id=72]
+[ext_resource path="res://Textures/Bitmaps/Alaska.png" type="BitMap" id=73]
+[ext_resource path="res://Textures/Bitmaps/Orient Mig.png" type="BitMap" id=74]
+[ext_resource path="res://Textures/Bitmaps/USAE.png" type="BitMap" id=75]
+[ext_resource path="res://Textures/Bitmaps/Alberta.png" type="BitMap" id=76]
+[ext_resource path="res://Textures/Bitmaps/Brasil.png" type="BitMap" id=77]
+[ext_resource path="res://Textures/Bitmaps/GreatBritain.png" type="BitMap" id=78]
+[ext_resource path="res://Textures/Bitmaps/Xina.png" type="BitMap" id=79]
+[ext_resource path="res://Textures/Bitmaps/Venezuela.png" type="BitMap" id=80]
+[ext_resource path="res://Textures/Bitmaps/Japo.png" type="BitMap" id=81]
+[ext_resource path="res://Textures/RiskMapTextures/Japo.png" type="Texture" id=82]
+[ext_resource path="res://Textures/Bitmaps/Afghanistan.png" type="BitMap" id=83]
+[ext_resource path="res://Textures/Bitmaps/AfricaOriental.png" type="BitMap" id=84]
+[ext_resource path="res://Textures/Bitmaps/AfricadoSul.png" type="BitMap" id=85]
+[ext_resource path="res://Textures/Bitmaps/AfricadoNorte.png" type="BitMap" id=86]
+
+[node name="Node" type="Node"]
+script = ExtResource( 1 )
+
+[node name="WorldMap" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Afghanistan" type="TextureButton" parent="WorldMap"]
+margin_left = 731.0
+margin_top = 116.0
+margin_right = 866.0
+margin_bottom = 202.0
+texture_normal = ExtResource( 3 )
+texture_click_mask = ExtResource( 83 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NorthAfrica" type="TextureButton" parent="WorldMap"]
+margin_left = 487.0
+margin_top = 197.0
+margin_right = 653.0
+margin_bottom = 354.0
+texture_normal = ExtResource( 4 )
+texture_click_mask = ExtResource( 86 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OrientalAfrica" type="TextureButton" parent="WorldMap"]
+margin_left = 647.0
+margin_top = 261.0
+margin_right = 766.0
+margin_bottom = 438.0
+texture_normal = ExtResource( 5 )
+texture_click_mask = ExtResource( 84 )
+
+[node name="SouthAfrica" type="TextureButton" parent="WorldMap"]
+margin_left = 605.0
+margin_top = 391.0
+margin_right = 723.0
+margin_bottom = 519.0
+texture_normal = ExtResource( 6 )
+texture_click_mask = ExtResource( 85 )
+
+[node name="Alaska" type="TextureButton" parent="WorldMap"]
+margin_left = 23.0
+margin_top = 53.0
+margin_right = 140.0
+margin_bottom = 102.0
+texture_normal = ExtResource( 7 )
+texture_click_mask = ExtResource( 73 )
+
+[node name="Alberta" type="TextureButton" parent="WorldMap"]
+margin_left = 101.0
+margin_top = 96.0
+margin_right = 219.0
+margin_bottom = 142.0
+texture_normal = ExtResource( 8 )
+texture_click_mask = ExtResource( 76 )
+
+[node name="CentralAmerica" type="TextureButton" parent="WorldMap"]
+margin_left = 94.0
+margin_top = 216.0
+margin_right = 283.0
+margin_bottom = 324.0
+texture_normal = ExtResource( 9 )
+texture_click_mask = ExtResource( 48 )
+
+[node name="NorthAmerica" type="TextureButton" parent="WorldMap"]
+margin_left = 98.0
+margin_top = 40.0
+margin_right = 316.0
+margin_bottom = 96.0
+texture_normal = ExtResource( 10 )
+texture_click_mask = ExtResource( 53 )
+
+[node name="Argentina" type="TextureButton" parent="WorldMap"]
+margin_left = 267.0
+margin_top = 444.0
+margin_right = 347.0
+margin_bottom = 611.0
+texture_normal = ExtResource( 11 )
+texture_click_mask = ExtResource( 67 )
+
+[node name="Brasil" type="TextureButton" parent="WorldMap"]
+margin_left = 249.0
+margin_top = 341.0
+margin_right = 410.0
+margin_bottom = 512.0
+texture_normal = ExtResource( 12 )
+texture_click_mask = ExtResource( 77 )
+
+[node name="Congo" type="TextureButton" parent="WorldMap"]
+margin_left = 595.0
+margin_top = 315.0
+margin_right = 699.0
+margin_bottom = 422.0
+texture_normal = ExtResource( 13 )
+texture_click_mask = ExtResource( 47 )
+
+[node name="Egypt" type="TextureButton" parent="WorldMap"]
+margin_left = 595.0
+margin_top = 215.0
+margin_right = 699.0
+margin_bottom = 273.0
+texture_normal = ExtResource( 14 )
+texture_click_mask = ExtResource( 51 )
+
+[node name="Scandinavia" type="TextureButton" parent="WorldMap"]
+margin_left = 583.0
+margin_top = 54.0
+margin_right = 664.0
+margin_bottom = 113.0
+texture_normal = ExtResource( 15 )
+texture_click_mask = ExtResource( 66 )
+
+[node name="NorthEurope" type="TextureButton" parent="WorldMap"]
+margin_left = 572.0
+margin_top = 110.0
+margin_right = 646.0
+margin_bottom = 156.0
+texture_normal = ExtResource( 16 )
+texture_click_mask = ExtResource( 69 )
+
+[node name="SouthEurope" type="TextureButton" parent="WorldMap"]
+margin_left = 582.0
+margin_top = 143.348
+margin_right = 666.0
+margin_bottom = 187.348
+texture_normal = ExtResource( 17 )
+texture_click_mask = ExtResource( 57 )
+
+[node name="WestEurope" type="TextureButton" parent="WorldMap"]
+margin_left = 524.0
+margin_top = 135.0
+margin_right = 587.0
+margin_bottom = 197.0
+texture_normal = ExtResource( 18 )
+texture_click_mask = ExtResource( 49 )
+
+[node name="GreatBritain" type="TextureButton" parent="WorldMap"]
+margin_left = 528.0
+margin_top = 106.0
+margin_right = 563.0
+margin_bottom = 134.0
+texture_normal = ExtResource( 19 )
+texture_click_mask = ExtResource( 78 )
+
+[node name="GreenLand" type="TextureButton" parent="WorldMap"]
+margin_left = 380.0
+margin_top = 12.0
+margin_right = 525.0
+margin_bottom = 92.0
+texture_normal = ExtResource( 20 )
+texture_click_mask = ExtResource( 52 )
+
+[node name="Iakutsk" type="TextureButton" parent="WorldMap"]
+margin_left = 889.0
+margin_top = 44.0
+margin_right = 1061.0
+margin_bottom = 114.0
+rect_scale = Vector2( 0.97, 0.95 )
+texture_normal = ExtResource( 21 )
+texture_click_mask = ExtResource( 54 )
+
+[node name="India" type="TextureButton" parent="WorldMap"]
+margin_left = 796.0
+margin_top = 191.0
+margin_right = 948.0
+margin_bottom = 334.0
+texture_normal = ExtResource( 22 )
+texture_click_mask = ExtResource( 63 )
+
+[node name="Indonesia" type="TextureButton" parent="WorldMap"]
+margin_left = 956.0
+margin_top = 282.0
+margin_right = 1079.0
+margin_bottom = 400.0
+texture_normal = ExtResource( 23 )
+texture_click_mask = ExtResource( 56 )
+
+[node name="Irkutsk" type="TextureButton" parent="WorldMap"]
+margin_left = 880.0
+margin_top = 80.0
+margin_right = 1037.0
+margin_bottom = 144.0
+texture_normal = ExtResource( 24 )
+texture_click_mask = ExtResource( 55 )
+
+[node name="Island" type="TextureButton" parent="WorldMap"]
+margin_left = 495.0
+margin_top = 73.0
+margin_right = 519.0
+margin_bottom = 80.0
+texture_normal = ExtResource( 25 )
+texture_click_mask = ExtResource( 70 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Japan" type="TextureButton" parent="WorldMap"]
+margin_left = 1078.0
+margin_top = 164.0
+margin_right = 1106.0
+margin_bottom = 207.0
+texture_normal = ExtResource( 82 )
+texture_click_mask = ExtResource( 81 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Kamtxatka" type="TextureButton" parent="WorldMap"]
+margin_left = 1010.0
+margin_top = 57.0
+margin_right = 1142.0
+margin_bottom = 168.0
+texture_normal = ExtResource( 26 )
+texture_click_mask = ExtResource( 44 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Madagascar" type="TextureButton" parent="WorldMap"]
+margin_left = 732.0
+margin_top = 420.0
+margin_right = 762.0
+margin_bottom = 479.0
+texture_normal = ExtResource( 27 )
+texture_click_mask = ExtResource( 72 )
+
+[node name="Mongolia" type="TextureButton" parent="WorldMap"]
+margin_left = 880.0
+margin_top = 123.0
+margin_right = 1064.0
+margin_bottom = 206.0
+texture_normal = ExtResource( 28 )
+texture_click_mask = ExtResource( 58 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NewGuinea" type="TextureButton" parent="WorldMap"]
+margin_left = 1104.0
+margin_top = 368.0
+margin_right = 1200.0
+margin_bottom = 409.0
+texture_normal = ExtResource( 29 )
+texture_click_mask = ExtResource( 60 )
+
+[node name="OcidentalAustralia" type="TextureButton" parent="WorldMap"]
+margin_left = 1011.0
+margin_top = 428.0
+margin_right = 1123.0
+margin_bottom = 534.0
+texture_normal = ExtResource( 30 )
+texture_click_mask = ExtResource( 59 )
+
+[node name="Ontario" type="TextureButton" parent="WorldMap"]
+margin_left = 192.0
+margin_top = 96.0
+margin_right = 280.0
+margin_bottom = 170.0
+texture_normal = ExtResource( 31 )
+texture_click_mask = ExtResource( 68 )
+
+[node name="OrientMig" type="TextureButton" parent="WorldMap"]
+margin_left = 663.0
+margin_top = 175.0
+margin_right = 808.0
+margin_bottom = 305.0
+texture_normal = ExtResource( 32 )
+texture_click_mask = ExtResource( 74 )
+
+[node name="OrientalAustralia" type="TextureButton" parent="WorldMap"]
+margin_left = 1075.0
+margin_top = 416.0
+margin_right = 1175.0
+margin_bottom = 541.0
+texture_normal = ExtResource( 33 )
+texture_click_mask = ExtResource( 62 )
+
+[node name="Peru" type="TextureButton" parent="WorldMap"]
+margin_left = 219.203
+margin_top = 357.594
+margin_right = 336.203
+margin_bottom = 486.594
+texture_normal = ExtResource( 34 )
+texture_click_mask = ExtResource( 71 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quebec" type="TextureButton" parent="WorldMap"]
+margin_left = 267.034
+margin_top = 87.3117
+margin_right = 362.034
+margin_bottom = 159.312
+texture_normal = ExtResource( 35 )
+texture_click_mask = ExtResource( 45 )
+
+[node name="Siam" type="TextureButton" parent="WorldMap"]
+margin_left = 933.0
+margin_top = 237.0
+margin_right = 1006.0
+margin_bottom = 355.0
+texture_normal = ExtResource( 36 )
+texture_click_mask = ExtResource( 64 )
+
+[node name="Siberia" type="TextureButton" parent="WorldMap"]
+margin_left = 800.0
+margin_top = 30.0
+margin_right = 917.0
+margin_bottom = 144.0
+texture_normal = ExtResource( 37 )
+texture_click_mask = ExtResource( 61 )
+
+[node name="Ucrania" type="TextureButton" parent="WorldMap"]
+margin_left = 637.0
+margin_top = 57.0
+margin_right = 780.0
+margin_bottom = 188.0
+texture_normal = ExtResource( 38 )
+texture_click_mask = ExtResource( 50 )
+
+[node name="Ural" type="TextureButton" parent="WorldMap"]
+margin_left = 749.0
+margin_top = 48.0
+margin_right = 874.0
+margin_bottom = 153.0
+texture_normal = ExtResource( 39 )
+texture_click_mask = ExtResource( 46 )
+
+[node name="USAE" type="TextureButton" parent="WorldMap"]
+margin_left = 133.0
+margin_top = 142.0
+margin_right = 309.0
+margin_bottom = 247.0
+texture_normal = ExtResource( 40 )
+texture_click_mask = ExtResource( 75 )
+
+[node name="USAO" type="TextureButton" parent="WorldMap"]
+margin_left = 82.0
+margin_top = 143.0
+margin_right = 197.0
+margin_bottom = 221.0
+texture_normal = ExtResource( 41 )
+texture_click_mask = ExtResource( 65 )
+
+[node name="Venezuela" type="TextureButton" parent="WorldMap"]
+margin_left = 227.0
+margin_top = 311.0
+margin_right = 339.0
+margin_bottom = 383.0
+texture_normal = ExtResource( 42 )
+texture_click_mask = ExtResource( 80 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="China" type="TextureButton" parent="WorldMap"]
+margin_left = 841.0
+margin_top = 142.0
+margin_right = 1043.0
+margin_bottom = 268.0
+texture_normal = ExtResource( 43 )
+texture_click_mask = ExtResource( 79 )
