@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/dicebitmap.png-cdcbd10abc27097003d9e5790b68ab13.res"
+
+[deps]
+
+source_file="res://Textures/Dice/dicebitmap.png"
+dest_files=[ "res://.import/dicebitmap.png-cdcbd10abc27097003d9e5790b68ab13.res" ]
+
+[params]
+
+create_from=1
+threshold=0.5

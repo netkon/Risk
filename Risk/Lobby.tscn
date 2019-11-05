@@ -48,14 +48,20 @@ font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=6]
 size = 24
+use_mipmaps = true
+use_filter = true
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=7]
 size = 24
+use_mipmaps = true
+use_filter = true
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=8]
 size = 20
+use_mipmaps = true
+use_filter = true
 font_data = ExtResource( 3 )
 
 [sub_resource type="Animation" id=9]
@@ -91,6 +97,9 @@ script = ExtResource( 1 )
 self_modulate = Color( 0, 0.356863, 1, 1 )
 margin_right = 1227.0
 margin_bottom = 628.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Host" type="Button" parent="."]
 visible = false
@@ -256,6 +265,9 @@ margin_right = 814.0
 margin_bottom = 380.0
 custom_fonts/font = ExtResource( 4 )
 text = "Connect"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ChooseYourName" type="LineEdit" parent="ConnectButton"]
 margin_top = -60.0

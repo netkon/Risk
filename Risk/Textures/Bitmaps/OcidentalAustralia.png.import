@@ -1,34 +1,15 @@
 [remap]
 
-importer="texture"
-type="StreamTexture"
-path="res://.import/OcidentalAustralia.png-24cd570c45c429d0d65eb8217df5d3d8.stex"
-metadata={
-"vram_texture": false
-}
+importer="bitmap"
+type="BitMap"
+path="res://.import/OcidentalAustralia.png-24cd570c45c429d0d65eb8217df5d3d8.res"
 
 [deps]
 
 source_file="res://Textures/Bitmaps/OcidentalAustralia.png"
-dest_files=[ "res://.import/OcidentalAustralia.png-24cd570c45c429d0d65eb8217df5d3d8.stex" ]
+dest_files=[ "res://.import/OcidentalAustralia.png-24cd570c45c429d0d65eb8217df5d3d8.res" ]
 
 [params]
 
-compress/mode=0
-compress/lossy_quality=0.7
-compress/hdr_mode=0
-compress/bptc_ldr=0
-compress/normal_map=0
-flags/repeat=0
-flags/filter=true
-flags/mipmaps=false
-flags/anisotropic=false
-flags/srgb=2
-process/fix_alpha_border=true
-process/premult_alpha=false
-process/HDR_as_SRGB=false
-process/invert_color=false
-stream=false
-size_limit=0
-detect_3d=true
-svg/scale=1.0
+create_from=1
+threshold=0.5

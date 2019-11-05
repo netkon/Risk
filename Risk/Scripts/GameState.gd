@@ -21,6 +21,7 @@ func _process(delta):
 	pass
 	
 func _ready():
+	randomize()
 	get_tree().connect("network_peer_connected", self, "_player_connected")
 	get_tree().connect("network_peer_disconnected" , self , "_player_disconnected")
 	get_tree().connect("server_disconnected" , self , "_server_disconnected")
@@ -93,7 +94,7 @@ func startGame(players):
 	game.name = str("Risk")
 	game.set_network_master(get_tree().get_network_unique_id())
 	get_tree().get_root().add_child(game)
-	
+	print("players in game" + str(playersingame))
 	#get_node("/root/Lobby").queue_free()
 	#get_node("/root/PreGame").queue_free()
 

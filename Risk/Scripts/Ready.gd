@@ -20,21 +20,23 @@ func _input(event):
 		get_node("/root/Lobby/CreateGame").visible = false
 		get_node("/root/Lobby/Host").visible = true
 		get_node("/root/Lobby/Join").visible = true
-		get_node("/root/Lobby").updateCurrentPlayersC(GameState.gameroompos , GameState.gameroom.size() - 1)
+
 		if get_tree().get_network_unique_id() == int(GameState.currentroominfo["gamehost"]):
 			
 			if GameState.gameroom.size() > 1:
+				get_node("/root/Lobby").updateCurrentPlayersC(GameState.gameroompos , GameState.gameroom.size() - 1)
 				for x in GameState.gameroom:
 					if x != get_tree().get_network_unique_id():
 						rpc_id(x , "changeGameHost" , get_tree().get_network_unique_id())						
 				removeLobbyPlayer(get_tree().get_network_unique_id())
 				
 			elif GameState.gameroom.size() == 1:
-				get_tree().get_root().get_node("Lobby").deleteRoomList(GameState.listofgamesnames[GameState.gameroompos]["position"])
+				get_tree().get_root().get_node("Lobby").deleteRoomList(GameState.listofgamesnames[GameState.gameroompos]["position"] , true)
 				removeLobbyPlayer(get_tree().get_network_unique_id())
 				
 			
 		else:
+			get_node("/root/Lobby").updateCurrentPlayersC(GameState.gameroompos , GameState.gameroom.size() - 1)
 			for x in GameState.gameroom:
 				if x != get_tree().get_network_unique_id():
 					rpc_id(x , "removeLobbyPlayer" , get_tree().get_network_unique_id())
@@ -63,7 +65,7 @@ func _input(event):
 			$Panel/ReadyButton.text = "Ready"
 			
 	if $Panel/StartGame.pressed == true and startpressed == false:
-		$Panel/Timer.start(3)
+		$Panel/Timer.start(4)
 		startpressed = true
 		$Panel/StartGame.text = "Stop Start"
 			
@@ -105,6 +107,7 @@ func _process(delta):
 		else:
 			if stepify(float(timer) , 0.1) == 0.5 and gamehasstarted == false:
 				gamehasstarted = true
+				get_tree().get_root().get_node("Lobby").deleteRoomList(GameState.listofgamesnames[GameState.gameroompos]["position"] , false)
 				GameState.startGame(readyamount)	
 						
 remote func plusOne(id):

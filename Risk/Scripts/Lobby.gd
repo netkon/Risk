@@ -87,7 +87,6 @@ func _on_CreateServerButton_pressed():
 			else:
 				rpc_id(1 , "setLobbyListVariables" , GameState.listofgamesnames.size() , get_tree().get_network_unique_id() , GameState.playername , $CreateGame/Label/GameName.text , $CreateGame/Label1/NOfPlayers.text ,true)
 	
-
 			yield(get_tree().create_timer(1), "timeout")
 			get_node("/root/PreGame/Panel/LeaveLobby").visible = true
 			
@@ -100,13 +99,14 @@ func _on_CreateServerButton_pressed():
 			else:
 				rpc_id(1 , "updateCurrentPlayersS" , GameState.listofgamesnames[GameState.gameroompos]["position"],GameState.gameroom.size())
 	
-func deleteRoomList(position):
+func deleteRoomList(position , queuefree):
 	if get_tree().is_network_server():
 		removeOne(position)
 	else:
 		rpc_id( 1 , "removeOne" , position)
 	
-	get_node("/root/Lobby/LobbyNames/" + GameState.listofgamesnames[position]["gamename"]).queue_free()
+	if queuefree == true:
+		get_node("/root/Lobby/LobbyNames/" + GameState.listofgamesnames[position]["gamename"]).queue_free()
 	GameState.listofgamesnames.remove(position)
 	rpc("removeRoomList" , position)
 	
