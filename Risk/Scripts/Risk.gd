@@ -20,12 +20,25 @@ func _process(delta):
 		
 	
 func _input(event):
-	pass
 	
 	
+	if turnready == true:
+		if whosturn == get_tree().get_network_unique_id():
+			print("myturn")
+			for x in range(countries.size()):
+				if get_node("WorldMap/FadeIn/" + countries[x]).is_pressed() and has_node("WorldMap/FadeIn/" + countries[x] + "/" + str(get_tree().get_network_unique_id())):
+					pass
+			
+			if $WorldMap/EndTurn.is_pressed():
+				$WorldMap/EndTurn.visible = false
+				for x in GameState.playersingame:
+					if x != get_tree().get_network_unique_id():
+						rpc_id(x , "turnChange")
+				turnChange()
+				
+		
 		
 func _ready():
-	pass
 	
 	get_tree().connect("screen_resized" , self , "screenResized")
 	get_tree().get_root().set_size_override_stretch(false)
@@ -118,7 +131,13 @@ remote func diceRoll(diceroll , playername , id):
 				rpc_id(x , "updateTurnInfo" , rolls)
 		updateTurnInfo(rolls)	
 		
-
+remote func updateScreenDice(dicenumber , playername , size):
+	var texture = load("res://Textures/Dice/" + str(dicenumber) + ".jpg")
+	var sprite = Sprite.new()
+	get_node("WorldMap").add_child(sprite)
+	sprite.set_texture(texture)
+	sprite.set_position(Vector2((get_tree().get_root().get_size().x)/2 + (size - GameState.playersingame.size() -i)*55, (get_tree().get_root().get_size().y)/2))
+	i -= 1
 	
 func diceRollNumber():
 	var roll = randi() % 6 + 1 
@@ -129,3 +148,12 @@ static func sort(a, b):
 		return true
 	return false
 
+remote func updateTurnInfo(turns):
+	rolls = turns
+	print("inverted after " + str(rolls))
+	yield(get_tree().create_timer(4), "timeout")
+	for x in range(GameState.playersingame.size()):
+		print(x)
+		get_node("WorldMap/@@1" + str(x+2)).queue_free()
+	turnready = true
+	turnChange()
