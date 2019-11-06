@@ -21,10 +21,21 @@ func _process(delta):
 	
 func _input(event):
 	
+	if $WorldMap/Dice.is_pressed():
+		print("working")
+		$WorldMap/Dice.disabled = true
+		var diceroll = diceRollNumber()
+		if get_tree().get_network_unique_id() == int(GameState.currentroominfo["gamehost"]): 
+			$WorldMap/Dice.visible = false
+			changeInfo("Waiting" , 1130)
+			diceRoll(diceroll , GameState.playername , get_tree().get_network_unique_id())
+		else:
+			$WorldMap/Dice.visible = false
+			changeInfo("Waiting" , 1130)
+			rpc_id(GameState.currentroominfo["gamehost"] , "diceRoll" , diceroll , GameState.playername ,get_tree().get_network_unique_id())
 	
 	if turnready == true:
 		if whosturn == get_tree().get_network_unique_id():
-			print("myturn")
 			for x in range(countries.size()):
 				if get_node("WorldMap/FadeIn/" + countries[x]).is_pressed() and has_node("WorldMap/FadeIn/" + countries[x] + "/" + str(get_tree().get_network_unique_id())):
 					pass
@@ -35,7 +46,16 @@ func _input(event):
 					if x != get_tree().get_network_unique_id():
 						rpc_id(x , "turnChange")
 				turnChange()
+				changeInfo("Waiting" , 1130)
 				
+				
+	if $Lip.is_hovered() and hovered == false:
+		$Lip/Stats/hopping.play("hopping")
+		hovered = true
+		
+	if $Lip/Stats.is_pressed() and hovered == true:
+		$Lip/Stats/hopping.play_backwards("hopping")
+		hovered = false
 		
 		
 func _ready():
@@ -97,7 +117,20 @@ func screenResized():
 	get_tree().get_root().set_size_override_stretch(false)
 	
 
-
+func setCountryColor(id , position):
+	for x in range(int(countries.size()/GameState.playersingame.size())):
+		var playerid = Label.new()
+		var infantryn = Label.new()
+		playerid.name = str(id)
+		infantryn.name = "armycount"
+		infantryn.text = str(1)
+		infantryn.visible = false
+		if id == get_tree().get_network_unique_id():
+			infantry = infantry -1
+		get_node("WorldMap/FadeIn/" + str(countries[count])).modulate = colors[position]
+		get_node("WorldMap/FadeIn/" + str(countries[count])).add_child(playerid)
+		get_node("WorldMap/FadeIn/" + str(countries[count])).add_child(infantryn)
+		count += 1	
 	
 remote func updateCountries(newcountries):
 	countries = newcountries
@@ -157,3 +190,23 @@ remote func updateTurnInfo(turns):
 		get_node("WorldMap/@@1" + str(x+2)).queue_free()
 	turnready = true
 	turnChange()
+
+remote func turnChange():
+	whosturn = rolls[0]["id"]
+	print( "whos turn "  + str(whosturn))
+	$Turn.text = str(rolls[0]["playername"]) + "'s Turn" 
+	rolls.append(rolls[0])
+	rolls.remove(0)
+	print("after rolls " + str(rolls))
+	$Turn._set_position(Vector2( 1366/2 - ($Turn.get_size().x)/2 , $Turn.get_position().y))
+	$Turn/Fade1.play("fade")
+	if whosturn == get_tree().get_network_unique_id():
+		$WorldMap/EndTurn.visible = true
+		changeInfo("Your Turn" , 1090)
+		
+func changeInfo(word , offset):
+	$Info/fade.play_backwards("fade2")
+	$Info._set_position(Vector2(offset ,  $Info.get_position().y))
+	$Info.text = word
+	$Info/fade.play("fade2")
+	
