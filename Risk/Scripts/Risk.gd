@@ -14,6 +14,8 @@ var turnready = false
 var whosturn
 var i = 0
 var hovered = false
+var pressed = null
+var fasedistribuicao = true
 
 func _process(delta):
 	pass
@@ -35,18 +37,35 @@ func _input(event):
 			rpc_id(GameState.currentroominfo["gamehost"] , "diceRoll" , diceroll , GameState.playername ,get_tree().get_network_unique_id())
 	
 	if turnready == true:
-		if whosturn == get_tree().get_network_unique_id():
-			for x in range(countries.size()):
-				if get_node("WorldMap/FadeIn/" + countries[x]).is_pressed() and has_node("WorldMap/FadeIn/" + countries[x] + "/" + str(get_tree().get_network_unique_id())):
-					pass
-			
-			if $WorldMap/EndTurn.is_pressed():
-				$WorldMap/EndTurn.visible = false
-				for x in GameState.playersingame:
-					if x != get_tree().get_network_unique_id():
-						rpc_id(x , "turnChange")
-				turnChange()
-				changeInfo("Waiting" , 1130)
+		if fasedistribuicao == true:	
+			if whosturn == get_tree().get_network_unique_id():
+				for x in range(countries.size()):
+					if get_node("WorldMap/FadeIn/" + countries[x]).is_pressed() and has_node("WorldMap/FadeIn/" + countries[x] + "/" + str(get_tree().get_network_unique_id())):
+						print(str(countries[x]) + " is toggled" )
+						pressed = countries[x]
+						print(pressed)
+						
+				if $WorldMap/EndTurn.is_pressed():
+					if pressed != null:
+						var temp1 = int(get_node("WorldMap/FadeIn/" + pressed + "/armycount").text)
+						print(temp1)
+						temp1 += 1
+						get_node("WorldMap/FadeIn/" + pressed + "/armycount").text = str(temp1)
+						for x in GameState.playersingame:
+							if x != get_tree().get_network_unique_id():
+								rpc_id(x , "updateTroops" , pressed , temp1)
+																
+						$WorldMap/EndTurn.visible = false
+						for x in GameState.playersingame:
+							if x != get_tree().get_network_unique_id():
+								rpc_id(x , "turnChange")
+						turnChange()
+						changeInfo("Waiting" , 1130)
+						pressed = null
+		
+		else:
+			pass			
+				
 				
 				
 	if $Lip.is_hovered() and hovered == false:
@@ -210,3 +229,5 @@ func changeInfo(word , offset):
 	$Info.text = word
 	$Info/fade.play("fade2")
 	
+remote func updateTroops(country , number):
+	get_node("WorldMap/FadeIn/" + country + "/armycount").text = str(number)
