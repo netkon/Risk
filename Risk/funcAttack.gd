@@ -1,25 +1,6 @@
 extends Node2D
 
-# Declare member variables here. Examples:
-# var a = 2
-
 var playerNumber = chooseFirstPlayer()
-
-################################################# Função escolher primeiro jogador ###############################################
-func chooseFirstPlayer():
-	if dice() == 1:
-		return 1;
-	elif dice() == 2:
-		return 2;
-	elif dice() == 3:
-		return 3;
-	elif dice() == 4:
-		return 4;
-	elif dice() == 5:
-		return 5;
-	elif dice() == 6:
-		return 6;
-############################################# Fim da função escolher primeiro jogador ###############################################
 
 ####################################################### Função para atacar ####################################################
 func attack(attackerRegion , defenderRegion):
@@ -105,11 +86,6 @@ func attack(attackerRegion , defenderRegion):
 									attackerRegion.armyCount = attackerRegion.armyCount - 1
 ################################################# Fim da função para atacar ###################################################								
 	
-############################################### Função lançar o dado #########################################################	
-
-func dice():
-	print(randi() % 6 +1)
-
 
 
 func _ready():
