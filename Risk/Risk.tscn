@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=2]
+[gd_scene load_steps=110 format=2]
 
 [ext_resource path="res://Scripts/Risk.gd" type="Script" id=1]
 [ext_resource path="res://Textures/RiskMapTextures/trytry.jpg" type="Texture" id=2]
@@ -94,9 +94,13 @@
 [ext_resource path="res://fonts/montreal/Montreal-Regular.ttf" type="DynamicFontData" id=92]
 [ext_resource path="res://Textures/lip.png" type="Texture" id=93]
 [ext_resource path="res://Textures/menu.png" type="Texture" id=94]
+[ext_resource path="res://Textures/arrow.png" type="Texture" id=95]
+[ext_resource path="res://fonts/montreal/Montreal.tres" type="DynamicFont" id=96]
 
 [sub_resource type="DynamicFont" id=1]
 size = 80
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 92 )
@@ -149,8 +153,10 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="DynamicFont" id=5]
-size = 24
+[sub_resource type="DynamicFont" id=13]
+size = 100
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 92 )
@@ -170,7 +176,9 @@ tracks/0/keys = {
 }
 
 [sub_resource type="DynamicFont" id=7]
-size = 40
+size = 30
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 92 )
@@ -204,21 +212,31 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.001, 0.4 )
 }
 
+[sub_resource type="DynamicFont" id=14]
+size = 40
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 92 )
+
 [sub_resource type="Animation" id=10]
 length = 0.3
 tracks/0/type = "bezier"
-tracks/0/path = NodePath(".:rect_scale:y")
+tracks/0/path = NodePath(".:rect_scale:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0.01, 0, 0, 0.25, 0, 2, 0, 0, 0.25, 0 ),
+"points": PoolRealArray( 0.001, -0.25, 0, 0.25, 0, 1.466, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.3 )
 }
 
 [sub_resource type="DynamicFont" id=11]
 size = 50
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 92 )
@@ -258,13 +276,35 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/Afghanistan"]
+margin_left = 67.6484
+margin_top = 29.1588
+margin_right = 107.648
+margin_bottom = 60.1588
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="NorthAfrica" type="TextureButton" parent="WorldMap/FadeIn"]
-margin_left = 555.625
-margin_top = 267.051
-margin_right = 721.625
-margin_bottom = 424.051
+margin_left = 556.0
+margin_top = 267.0
+margin_right = 722.0
+margin_bottom = 424.0
 texture_normal = ExtResource( 4 )
 texture_click_mask = ExtResource( 51 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/NorthAfrica"]
+margin_left = 68.3984
+margin_top = 70.8419
+margin_right = 108.398
+margin_bottom = 101.842
+custom_fonts/font = ExtResource( 96 )
+text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -277,6 +317,17 @@ margin_bottom = 508.433
 texture_normal = ExtResource( 5 )
 texture_click_mask = ExtResource( 58 )
 
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/OrientalAfrica"]
+margin_left = 61.2011
+margin_top = 61.0931
+margin_right = 101.201
+margin_bottom = 92.0931
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="SouthAfrica" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 674.155
 margin_top = 461.385
@@ -284,6 +335,17 @@ margin_right = 792.155
 margin_bottom = 589.385
 texture_normal = ExtResource( 6 )
 texture_click_mask = ExtResource( 57 )
+
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/SouthAfrica"]
+margin_left = 44.9803
+margin_top = 55.4043
+margin_right = 84.9803
+margin_bottom = 86.4043
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Alaska" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 91.7182
@@ -293,6 +355,17 @@ margin_bottom = 172.307
 texture_normal = ExtResource( 7 )
 texture_click_mask = ExtResource( 62 )
 
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/Alaska"]
+margin_left = 57.9434
+margin_top = 5.06127
+margin_right = 97.9434
+margin_bottom = 36.0613
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Alberta" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 170.144
 margin_top = 165.625
@@ -300,6 +373,17 @@ margin_right = 288.144
 margin_bottom = 211.625
 texture_normal = ExtResource( 8 )
 texture_click_mask = ExtResource( 59 )
+
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/Alberta"]
+margin_left = 47.9387
+margin_top = 9.05907
+margin_right = 87.9387
+margin_bottom = 40.0591
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CentralAmerica" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 163.058
@@ -309,6 +393,17 @@ margin_bottom = 395.128
 texture_normal = ExtResource( 9 )
 texture_click_mask = ExtResource( 60 )
 
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/CentralAmerica"]
+margin_left = 40.2879
+margin_top = 27.5034
+margin_right = 80.2879
+margin_bottom = 58.5034
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="NorthAmerica" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 167.309
 margin_top = 110.307
@@ -316,6 +411,17 @@ margin_right = 385.309
 margin_bottom = 166.307
 texture_normal = ExtResource( 10 )
 texture_click_mask = ExtResource( 61 )
+
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/NorthAmerica"]
+margin_left = 77.0895
+margin_top = 24.3771
+margin_right = 117.089
+margin_bottom = 55.3771
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Argentina" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 336.056
@@ -325,6 +431,17 @@ margin_bottom = 681.188
 texture_normal = ExtResource( 11 )
 texture_click_mask = ExtResource( 49 )
 
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/Argentina"]
+margin_left = 29.3951
+margin_top = 58.3908
+margin_right = 69.3951
+margin_bottom = 89.3908
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Brasil" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 318.408
 margin_top = 411.244
@@ -332,6 +449,17 @@ margin_right = 479.408
 margin_bottom = 582.244
 texture_normal = ExtResource( 12 )
 texture_click_mask = ExtResource( 48 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/Brasil"]
+margin_left = 90.201
+margin_top = 59.2295
+margin_right = 130.201
+margin_bottom = 90.2295
+custom_fonts/font = ExtResource( 96 )
+text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -347,6 +475,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/Congo"]
+margin_left = 46.02
+margin_top = 37.864
+margin_right = 86.02
+margin_bottom = 68.864
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Egypt" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 664.25
 margin_top = 285.463
@@ -354,6 +493,17 @@ margin_right = 769.25
 margin_bottom = 344.463
 texture_normal = ExtResource( 14 )
 texture_click_mask = ExtResource( 46 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/Egypt"]
+margin_left = 47.1567
+margin_top = 14.8309
+margin_right = 87.1568
+margin_bottom = 45.8309
+custom_fonts/font = ExtResource( 96 )
+text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -366,6 +516,17 @@ margin_bottom = 182.905
 texture_normal = ExtResource( 15 )
 texture_click_mask = ExtResource( 50 )
 
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/Scandinavia"]
+margin_left = 22.6583
+margin_top = 20.4578
+margin_right = 62.6584
+margin_bottom = 51.4578
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="NorthEurope" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 640.881
 margin_top = 179.391
@@ -374,6 +535,17 @@ margin_bottom = 226.391
 texture_normal = ExtResource( 16 )
 texture_click_mask = ExtResource( 52 )
 
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/NorthEurope"]
+margin_left = 29.8362
+margin_top = 8.22368
+margin_right = 69.8362
+margin_bottom = 39.2237
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="SouthEurope" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 651.155
 margin_top = 212.503
@@ -381,6 +553,17 @@ margin_right = 736.155
 margin_bottom = 256.503
 texture_normal = ExtResource( 17 )
 texture_click_mask = ExtResource( 47 )
+
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/SouthEurope"]
+margin_left = 53.007
+margin_top = 9.76976
+margin_right = 93.007
+margin_bottom = 40.7698
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="WestEurope" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 593.155
@@ -393,6 +576,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/WestEurope"]
+margin_left = 11.5514
+margin_top = 32.8069
+margin_right = 51.5514
+margin_bottom = 63.8069
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="GreatBritain" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 597.236
 margin_top = 175.56
@@ -400,6 +594,17 @@ margin_right = 634.236
 margin_bottom = 203.56
 texture_normal = ExtResource( 19 )
 texture_click_mask = ExtResource( 55 )
+
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/GreatBritain"]
+margin_left = 22.1315
+margin_top = 2.55792
+margin_right = 62.1316
+margin_bottom = 33.5579
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="GreenLand" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 448.66
@@ -412,6 +617,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/GreenLand"]
+margin_left = 66.4508
+margin_top = 13.0581
+margin_right = 106.451
+margin_bottom = 44.0581
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Iakutsk" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 954.803
 margin_top = 112.551
@@ -419,6 +635,17 @@ margin_right = 1126.8
 margin_bottom = 182.551
 texture_normal = ExtResource( 21 )
 texture_click_mask = ExtResource( 72 )
+
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/Iakutsk"]
+margin_left = 79.1799
+margin_top = 19.4184
+margin_right = 119.18
+margin_bottom = 50.4184
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="India" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 865.1
@@ -428,6 +655,17 @@ margin_bottom = 404.076
 texture_normal = ExtResource( 22 )
 texture_click_mask = ExtResource( 70 )
 
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/India"]
+margin_left = 70.7476
+margin_top = 50.2405
+margin_right = 110.748
+margin_bottom = 81.2405
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Indonesia" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 1023.93
 margin_top = 352.227
@@ -436,6 +674,17 @@ margin_bottom = 471.227
 texture_normal = ExtResource( 23 )
 texture_click_mask = ExtResource( 76 )
 
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/Indonesia"]
+margin_left = 68.668
+margin_top = 65.9785
+margin_right = 108.668
+margin_bottom = 96.9785
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Irkutsk" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 948.181
 margin_top = 148.869
@@ -443,6 +692,17 @@ margin_right = 1106.18
 margin_bottom = 213.869
 texture_normal = ExtResource( 24 )
 texture_click_mask = ExtResource( 72 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/Irkutsk"]
+margin_left = 64.0945
+margin_top = 22.954
+margin_right = 104.095
+margin_bottom = 53.954
+custom_fonts/font = ExtResource( 96 )
+text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -458,6 +718,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/Island"]
+margin_left = 6.19525
+margin_top = -10.6761
+margin_right = 46.1953
+margin_bottom = 20.3239
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Japan" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 1144.98
 margin_top = 233.074
@@ -465,6 +736,17 @@ margin_right = 1174.98
 margin_bottom = 278.074
 texture_normal = ExtResource( 45 )
 texture_click_mask = ExtResource( 80 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/Japan"]
+margin_left = 14.7365
+margin_top = 22.6903
+margin_right = 54.7365
+margin_bottom = 53.6903
+custom_fonts/font = ExtResource( 96 )
+text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -480,6 +762,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/Kamtxatka"]
+margin_left = 54.8879
+margin_top = 6.99499
+margin_right = 94.888
+margin_bottom = 37.995
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Madagascar" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 801.301
 margin_top = 490.328
@@ -488,6 +781,17 @@ margin_bottom = 549.328
 texture_normal = ExtResource( 27 )
 texture_click_mask = ExtResource( 66 )
 
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/Madagascar"]
+margin_left = 9.08276
+margin_top = 17.959
+margin_right = 49.0828
+margin_bottom = 48.959
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Mongolia" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 949.228
 margin_top = 193.481
@@ -495,6 +799,17 @@ margin_right = 1133.23
 margin_bottom = 276.481
 texture_normal = ExtResource( 28 )
 texture_click_mask = ExtResource( 84 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/Mongolia"]
+margin_left = 79.8362
+margin_top = 24.5477
+margin_right = 119.836
+margin_bottom = 55.5477
+custom_fonts/font = ExtResource( 96 )
+text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -510,6 +825,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/NewGuinea"]
+margin_left = 34.4603
+margin_top = 7.50461
+margin_right = 74.4604
+margin_bottom = 38.5046
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="OcidentalAustralia" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 1080.09
 margin_top = 497.055
@@ -517,6 +843,17 @@ margin_right = 1192.09
 margin_bottom = 605.055
 texture_normal = ExtResource( 30 )
 texture_click_mask = ExtResource( 79 )
+
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/OcidentalAustralia"]
+margin_left = 32.363
+margin_top = 42.9881
+margin_right = 72.3631
+margin_bottom = 73.9881
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Ontario" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 261.1
@@ -526,6 +863,17 @@ margin_bottom = 239.98
 texture_normal = ExtResource( 31 )
 texture_click_mask = ExtResource( 75 )
 
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/Ontario"]
+margin_left = 34.5905
+margin_top = 12.1605
+margin_right = 74.5905
+margin_bottom = 43.1605
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="OrientMig" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 730.762
 margin_top = 245.225
@@ -534,6 +882,17 @@ margin_bottom = 375.225
 texture_normal = ExtResource( 32 )
 texture_click_mask = ExtResource( 68 )
 
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/OrientMig"]
+margin_left = 65.816
+margin_top = 49.338
+margin_right = 105.816
+margin_bottom = 80.338
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="OrientalAustralia" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 1143.11
 margin_top = 484.791
@@ -541,6 +900,17 @@ margin_right = 1244.11
 margin_bottom = 610.791
 texture_normal = ExtResource( 33 )
 texture_click_mask = ExtResource( 77 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/OrientalAustralia"]
+margin_left = 60.8993
+margin_top = 50.6422
+margin_right = 100.899
+margin_bottom = 81.6422
+custom_fonts/font = ExtResource( 96 )
+text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -556,6 +926,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/Peru"]
+margin_left = 47.2663
+margin_top = 52.8469
+margin_right = 87.2663
+margin_bottom = 83.8469
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Quebec" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 336.259
 margin_top = 156.759
@@ -564,6 +945,17 @@ margin_bottom = 228.76
 texture_normal = ExtResource( 35 )
 texture_click_mask = ExtResource( 67 )
 
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/Quebec"]
+margin_left = 40.929
+margin_top = 17.504
+margin_right = 80.929
+margin_bottom = 48.504
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Siam" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 1001.7
 margin_top = 307.211
@@ -571,6 +963,20 @@ margin_right = 1074.7
 margin_bottom = 426.211
 texture_normal = ExtResource( 36 )
 texture_click_mask = ExtResource( 64 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/Siam"]
+margin_left = 35.9327
+margin_top = 31.5802
+margin_right = 75.9327
+margin_bottom = 62.5802
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Siberia" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 867.928
@@ -579,6 +985,17 @@ margin_right = 985.928
 margin_bottom = 214.98
 texture_normal = ExtResource( 37 )
 texture_click_mask = ExtResource( 74 )
+
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/Siberia"]
+margin_left = 59.431
+margin_top = 26.7402
+margin_right = 99.4311
+margin_bottom = 57.7402
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Ucrania" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 704.585
@@ -591,6 +1008,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/Ucrania"]
+margin_left = 59.0378
+margin_top = 43.0825
+margin_right = 99.0379
+margin_bottom = 74.0825
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Ural" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 817.825
 margin_top = 116.68
@@ -599,6 +1027,17 @@ margin_bottom = 222.68
 texture_normal = ExtResource( 39 )
 texture_click_mask = ExtResource( 73 )
 
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/Ural"]
+margin_left = 41.2509
+margin_top = 32.4776
+margin_right = 81.2509
+margin_bottom = 63.4776
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="USAE" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 202.03
 margin_top = 212.42
@@ -606,6 +1045,17 @@ margin_right = 378.03
 margin_bottom = 317.42
 texture_normal = ExtResource( 40 )
 texture_click_mask = ExtResource( 69 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/USAE"]
+margin_left = 70.1561
+margin_top = 41.0131
+margin_right = 110.156
+margin_bottom = 72.0131
+custom_fonts/font = ExtResource( 96 )
+text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -621,6 +1071,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/USAO"]
+margin_left = 45.5846
+margin_top = 22.2384
+margin_right = 85.5846
+margin_bottom = 53.2384
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Venezuela" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 295.913
 margin_top = 380.56
@@ -632,6 +1093,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/Venezuela"]
+margin_left = 28.5685
+margin_top = 12.5162
+margin_right = 68.5685
+margin_bottom = 43.5162
+custom_fonts/font = ExtResource( 96 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="China" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 910.1
 margin_top = 212.42
@@ -639,6 +1111,17 @@ margin_right = 1112.1
 margin_bottom = 338.42
 texture_normal = ExtResource( 43 )
 texture_click_mask = ExtResource( 85 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="armycount" type="Label" parent="WorldMap/FadeIn/China"]
+margin_left = 103.256
+margin_top = 53.9656
+margin_right = 143.256
+margin_bottom = 84.9656
+custom_fonts/font = ExtResource( 96 )
+text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -680,13 +1163,25 @@ anims/Anim = SubResource( 3 )
 [node name="PopIn" type="AnimationPlayer" parent="WorldMap/Dice/Dice"]
 anims/PopIn = SubResource( 4 )
 
-[node name="EndTurn" type="Button" parent="WorldMap"]
+[node name="EndTurn" type="TextureButton" parent="WorldMap"]
 visible = false
-margin_left = 1123.86
-margin_top = 719.352
-margin_right = 1361.86
-margin_bottom = 763.352
-custom_fonts/font = SubResource( 5 )
+self_modulate = Color( 0.717647, 0.196078, 0.196078, 1 )
+margin_left = 1048.41
+margin_top = 655.142
+margin_right = 2030.41
+margin_bottom = 979.142
+rect_scale = Vector2( 0.3, 0.3 )
+texture_normal = ExtResource( 95 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="WorldMap/EndTurn"]
+margin_left = 219.47
+margin_top = 97.0
+margin_right = 673.47
+margin_bottom = 220.0
+custom_fonts/font = SubResource( 13 )
 text = "End Turn"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -697,12 +1192,14 @@ anims/anim = SubResource( 6 )
 
 [node name="Info" type="Label" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
-margin_left = 1028.0
-margin_top = 646.0
-margin_right = 1263.0
-margin_bottom = 696.0
+margin_left = 605.0
+margin_top = 5.0
+margin_right = 766.0
+margin_bottom = 55.0
 custom_fonts/font = SubResource( 7 )
-text = "Waiting for "
+text = "Waiting"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -712,12 +1209,11 @@ anims/fade = SubResource( 8 )
 anims/fade2 = SubResource( 9 )
 
 [node name="Lip" type="TextureButton" parent="."]
-margin_left = 1340.63
-margin_top = 713.74
-margin_right = 2670.63
-margin_bottom = 796.74
-rect_rotation = 270.0
-rect_scale = Vector2( 0.5, 0.3 )
+margin_left = 1340.99
+margin_top = 53.7112
+margin_right = 1425.99
+margin_bottom = 1384.71
+rect_scale = Vector2( 0.3, 0.496 )
 texture_normal = ExtResource( 93 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -725,17 +1221,34 @@ __meta__ = {
 
 [node name="Stats" type="TextureButton" parent="Lip"]
 show_behind_parent = true
-anchor_left = 0.018
-anchor_top = 0.514
-anchor_right = 0.018
-anchor_bottom = 0.514
-margin_left = -23.645
-margin_top = -559.961
-margin_right = 876.355
-margin_bottom = 40.0392
-rect_scale = Vector2( 1.466, 0.01 )
-rect_pivot_offset = Vector2( 0, 600 )
+anchor_left = 2.637
+anchor_top = 1.0
+anchor_right = 2.637
+anchor_bottom = 1.0
+margin_left = -1041.21
+margin_top = -1331.0
+margin_right = -141.215
+margin_bottom = -731.0
+rect_scale = Vector2( 0.001, 2.215 )
+rect_pivot_offset = Vector2( 900, 0 )
 texture_normal = ExtResource( 94 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TurnOrder" type="Label" parent="Lip/Stats"]
+anchor_left = 0.354
+anchor_top = -4.762
+anchor_right = 0.354
+anchor_bottom = -4.762
+margin_left = -140.824
+margin_top = 2885.57
+margin_right = 72.1759
+margin_bottom = 2935.57
+rect_rotation = 360.0
+rect_scale = Vector2( 2.5, 1 )
+custom_fonts/font = SubResource( 14 )
+text = "Turn order"
 __meta__ = {
 "_edit_use_anchors_": false
 }

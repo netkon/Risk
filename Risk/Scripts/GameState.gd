@@ -21,6 +21,7 @@ func _process(delta):
 	pass
 	
 func _ready():
+
 	randomize()
 	get_tree().connect("network_peer_connected", self, "_player_connected")
 	get_tree().connect("network_peer_disconnected" , self , "_player_disconnected")
@@ -82,6 +83,8 @@ func startCORS():
 		server.create_server(SERVERPORT , 10)
 		get_tree().set_network_peer(server)	
 
+	print("my id is " + str(get_tree().get_network_unique_id()))
+	
 func createPlayer(id):
 	var player = preload("res://Player.tscn").instance()
 	player.name = str(id)
@@ -91,6 +94,7 @@ func createPlayer(id):
 func startGame(players):
 	playersingame = players
 	var game = preload("res://Risk.tscn").instance()
+	yield(get_tree().create_timer(0.5), "timeout")
 	game.name = str("Risk")
 	game.set_network_master(get_tree().get_network_unique_id())
 	get_tree().get_root().add_child(game)

@@ -1,7 +1,14 @@
 extends "res://addons/gut/test.gd"
 
 var funct = preload("res://Scripts/Risk.gd")
+var funca
 
-func test16():
-	var dado = diceRollNumber.new()
-	assert_between(roll , 1 , 6)
+func _ready():
+	funca = funct.new()
+	
+func test_assert_eq_diceroll():
+	assert_between(funca.diceRollNumber() , 1 , 6)
+	
+func test_assert_eq_turnoigualajogadores():
+	assert_eq(funca.rolls.size() , GameState.playersingame.size())
+		
