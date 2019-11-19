@@ -107,7 +107,8 @@ func _process(delta):
 		else:
 			if stepify(float(timer) , 0.1) == 0.5 and gamehasstarted == false:
 				gamehasstarted = true
-				get_tree().get_root().get_node("Lobby").deleteRoomList(GameState.listofgamesnames[GameState.gameroompos]["position"] , false)
+				if get_tree().get_network_unique_id() == GameState.currentroominfo["gamehost"]:
+					get_tree().get_root().get_node("Lobby").deleteRoomList(GameState.listofgamesnames[GameState.gameroompos]["position"] , false)
 				GameState.startGame(readyamount)	
 						
 remote func plusOne(id):

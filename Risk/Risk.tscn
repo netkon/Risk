@@ -1,4 +1,4 @@
-[gd_scene load_steps=110 format=2]
+[gd_scene load_steps=114 format=2]
 
 [ext_resource path="res://Scripts/Risk.gd" type="Script" id=1]
 [ext_resource path="res://Textures/RiskMapTextures/trytry.jpg" type="Texture" id=2]
@@ -96,6 +96,8 @@
 [ext_resource path="res://Textures/menu.png" type="Texture" id=94]
 [ext_resource path="res://Textures/arrow.png" type="Texture" id=95]
 [ext_resource path="res://fonts/montreal/Montreal.tres" type="DynamicFont" id=96]
+[ext_resource path="res://Textures/minus.png" type="Texture" id=97]
+[ext_resource path="res://Textures/plus.png" type="Texture" id=98]
 
 [sub_resource type="DynamicFont" id=1]
 size = 80
@@ -153,7 +155,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="DynamicFont" id=13]
+[sub_resource type="DynamicFont" id=5]
 size = 100
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
@@ -177,7 +179,7 @@ tracks/0/keys = {
 
 [sub_resource type="DynamicFont" id=7]
 size = 30
-outline_size = 2
+outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
@@ -185,22 +187,7 @@ font_data = ExtResource( 92 )
 
 [sub_resource type="Animation" id=8]
 resource_name = "fade"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=9]
-resource_name = "fade2"
+length = 0.6
 tracks/0/type = "bezier"
 tracks/0/path = NodePath(".:self_modulate:a")
 tracks/0/interp = 1
@@ -208,11 +195,11 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.001, 0.4 )
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
 }
 
-[sub_resource type="DynamicFont" id=14]
+[sub_resource type="DynamicFont" id=9]
 size = 40
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
@@ -242,8 +229,35 @@ use_filter = true
 font_data = ExtResource( 92 )
 
 [sub_resource type="Animation" id=12]
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 2.1, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=13]
 resource_name = "fade"
-length = 4.0
+length = 0.7
 tracks/0/type = "bezier"
 tracks/0/path = NodePath(".:self_modulate:a")
 tracks/0/interp = 1
@@ -251,8 +265,43 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 4 )
+"points": PoolRealArray( 0.5, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+
+[sub_resource type="DynamicFont" id=14]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 92 )
+
+[sub_resource type="Animation" id=15]
+resource_name = "appear"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.00878928, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, true ]
 }
 
 [node name="Node" type="Node"]
@@ -263,7 +312,7 @@ texture = ExtResource( 2 )
 centered = false
 
 [node name="FadeIn" type="Sprite" parent="WorldMap"]
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color( 1, 1, 1, 0.283023 )
 
 [node name="Afghanistan" type="TextureButton" parent="WorldMap/FadeIn"]
 margin_left = 800.188
@@ -1181,7 +1230,7 @@ margin_left = 219.47
 margin_top = 97.0
 margin_right = 673.47
 margin_bottom = 220.0
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 5 )
 text = "End Turn"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1190,14 +1239,13 @@ __meta__ = {
 [node name="FadingIn" type="AnimationPlayer" parent="WorldMap"]
 anims/anim = SubResource( 6 )
 
+[node name="TempDice" type="Node" parent="WorldMap"]
+
 [node name="Info" type="Label" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
-margin_left = 605.0
-margin_top = 5.0
-margin_right = 766.0
-margin_bottom = 55.0
+margin_right = 1366.0
+margin_bottom = 60.0
 custom_fonts/font = SubResource( 7 )
-text = "Waiting"
 align = 1
 valign = 1
 __meta__ = {
@@ -1206,7 +1254,6 @@ __meta__ = {
 
 [node name="fade" type="AnimationPlayer" parent="Info"]
 anims/fade = SubResource( 8 )
-anims/fade2 = SubResource( 9 )
 
 [node name="Lip" type="TextureButton" parent="."]
 margin_left = 1340.99
@@ -1247,7 +1294,7 @@ margin_right = 72.1759
 margin_bottom = 2935.57
 rect_rotation = 360.0
 rect_scale = Vector2( 2.5, 1 )
-custom_fonts/font = SubResource( 14 )
+custom_fonts/font = SubResource( 9 )
 text = "Turn order"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1257,17 +1304,97 @@ __meta__ = {
 anims/hopping = SubResource( 10 )
 
 [node name="Turn" type="Label" parent="."]
-self_modulate = Color( 1, 1, 1, 0 )
-margin_left = 600.0
+modulate = Color( 1, 1, 1, 0 )
 margin_top = 141.0
-margin_right = 765.0
+margin_right = 1366.0
 margin_bottom = 203.0
+grow_horizontal = 2
+grow_vertical = 2
 custom_fonts/font = SubResource( 11 )
-text = "
-"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Fade1" type="AnimationPlayer" parent="Turn"]
 anims/fade = SubResource( 12 )
+
+[node name="Panel" type="Panel" parent="Turn"]
+visible = false
+self_modulate = Color( 1, 1, 1, 0.576471 )
+show_behind_parent = true
+margin_left = 300.0
+margin_right = 1066.0
+margin_bottom = 450.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Top" type="Panel" parent="Turn/Panel"]
+margin_right = 766.0
+margin_bottom = 63.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dark" type="Panel" parent="."]
+visible = false
+self_modulate = Color( 0, 0, 0, 0.5 )
+margin_right = 1366.0
+margin_bottom = 768.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DarkFadein" type="AnimationPlayer" parent="Dark"]
+anims/fade = SubResource( 13 )
+
+[node name="AddTroops" type="Panel" parent="."]
+visible = false
+margin_left = 631.0
+margin_top = 189.0
+margin_right = 756.0
+margin_bottom = 222.0
+rect_scale = Vector2( 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Plus" type="TextureButton" parent="AddTroops"]
+margin_left = 2.0
+margin_top = 4.0
+margin_right = 52.0
+margin_bottom = 54.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture_normal = ExtResource( 98 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Minus" type="TextureButton" parent="AddTroops"]
+margin_left = 98.0
+margin_top = 4.0
+margin_right = 148.0
+margin_bottom = 54.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture_normal = ExtResource( 97 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HMTroops" type="LineEdit" parent="AddTroops"]
+margin_left = 32.0
+margin_top = 2.0
+margin_right = 92.0
+margin_bottom = 33.0
+rect_scale = Vector2( 1, 0.9 )
+custom_fonts/font = SubResource( 14 )
+text = "1"
+max_length = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="appear" type="AnimationPlayer" parent="AddTroops"]
+anims/appear = SubResource( 15 )

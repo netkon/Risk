@@ -99,29 +99,26 @@ func _on_CreateServerButton_pressed():
 			else:
 				rpc_id(1 , "updateCurrentPlayersS" , GameState.listofgamesnames[GameState.gameroompos]["position"],GameState.gameroom.size())
 	
-func deleteRoomList(position , queuefree):
-	if get_tree().is_network_server():
-		removeOne(position)
-	else:
-		rpc_id( 1 , "removeOne" , position)
-	
-	if queuefree == true:
-		get_node("/root/Lobby/LobbyNames/" + GameState.listofgamesnames[position]["gamename"]).queue_free()
-	GameState.listofgamesnames.remove(position)
-	rpc("removeRoomList" , position)
-	
-
 remote func removeOne(position):
 	for x in GameState.listofgamesnames.size():
 		if GameState.listofgamesnames[x]["position"] > position:
 			GameState.listofgamesnames[x]["position"] = GameState.listofgamesnames[x]["position"] - 1
 			rpc_id(GameState.listofgamesnames[x]["id"] , "updateGameRoomPosS" , GameState.listofgamesnames[x]["position"])
 
-
-remote func removeRoomList(position):
-	get_node("/root/Lobby/LobbyNames/" + GameState.listofgamesnames[position]["gamename"]).queue_free()
-	GameState.listofgamesnames.remove(position)
+func deleteRoomList(position , queuefree):
+	rpc("removeRoomList" , position)
 	
+	if get_tree().is_network_server():
+		removeOne(position)
+	else:
+		rpc_id( 1 , "removeOne" , position)
+
+remotesync func removeRoomList(position):
+	if has_node("/root/Lobby/LobbyNames/" + str(GameState.listofgamesnames[position]["gamename"])):
+		get_node("/root/Lobby/LobbyNames/" + str(GameState.listofgamesnames[position]["gamename"])).queue_free()
+		GameState.listofgamesnames.remove(position)
+
+		
 remote func updateGameRoomPosS(position):
 	for x in GameState.gameroom:
 		if x != get_tree().get_network_unique_id():
