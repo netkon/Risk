@@ -21,7 +21,8 @@ func _process(delta):
 	pass
 	
 func _ready():
-	print(IP.get_local_addresses()[3])
+	print(str(int(-3/2)))
+	print(IP.get_local_addresses()[1])
 	randomize()
 	get_tree().connect("network_peer_connected", self, "_player_connected")
 	get_tree().connect("network_peer_disconnected" , self , "_player_disconnected")
@@ -67,17 +68,17 @@ func startCORS():
 	
 	var noretrys = 0
 	client = NetworkedMultiplayerENet.new()
-	client.create_client(IP.get_local_addresses()[3] , SERVERPORT)
+	client.create_client("127.0.0.1" , SERVERPORT)
 	get_tree().set_network_peer(client)
 	
 	if client.get_connection_status() == client.CONNECTION_CONNECTED:
 		pass	
 	elif client.get_connection_status() == client.CONNECTION_CONNECTING:
-		while (client.get_connection_status() == client.CONNECTION_CONNECTING) and (noretrys < 11):
+		while (client.get_connection_status() == client.CONNECTION_CONNECTING) and (noretrys < 22):
 			yield(get_tree().create_timer(0.1), "timeout")
 			noretrys +=1
 				
-	if (client.get_connection_status() == client.CONNECTION_CONNECTING) and (noretrys >= 11):
+	if (client.get_connection_status() == client.CONNECTION_CONNECTING) and (noretrys >= 22):
 		
 		var server = NetworkedMultiplayerENet.new()
 		server.create_server(SERVERPORT , 10)

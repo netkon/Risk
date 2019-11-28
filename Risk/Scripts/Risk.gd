@@ -1,8 +1,5 @@
 extends Node
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text
 var roll = {"id" : "" , "roll" : "" , "playername" : "" , "color" : ""}
 var rolls = []
 var colors = []
@@ -23,6 +20,16 @@ var attackturn
 var fortifyturn
 var colortemp = []
 var pressedattack
+var timetoattack = false
+var rpcsenderid
+var defenderdice = []
+var attackerdice = []
+var cards = []
+var cardsinhand = []
+var getcard = false
+var cardspressed = false
+var cardchecked = []
+var infantrycards = 4
 
 func _process(delta):
 	pass
@@ -57,8 +64,7 @@ func _input(event):
 							ntroops += 1
 							get_node("WorldMap/FadeIn/" + pressed + "/armycount").text = str(ntroops)
 							
-							get_node("WorldMap/FadeIn/" + pressed).modulate = mycolor
-							
+							remoteModulate(pressed , mycolor)
 							for x in GameState.playersingame:
 								if x != get_tree().get_network_unique_id():
 									rpc_id(x , "updateTroops" , pressed , ntroops)
@@ -75,11 +81,12 @@ func _input(event):
 							
 							if infantry == 0:
 								$Turn/Panel.visible = true
+								$WorldMap/CardHolder/fade.play("fadei")
 								fasedistribuicao = false
+								
 			
 		else:
 			if whosturn == get_tree().get_network_unique_id():
-				
 				if placeturn == true:
 					for x in range(countries.size()):
 						if get_node("WorldMap/FadeIn/" + countries[x]).is_pressed() and has_node("WorldMap/FadeIn/" + countries[x] + "/" + str(get_tree().get_network_unique_id())):
@@ -108,50 +115,69 @@ func _input(event):
 						get_node("WorldMap/FadeIn/" + pressed + "/armycount").text = str(int(get_node("WorldMap/FadeIn/" + pressed + "/armycount").text) + int($AddTroops/HMTroops.text))
 						infantry = infantry - int($AddTroops/HMTroops.text)
 						for x in GameState.playersingame:
-								if x != get_tree().get_network_unique_id():
-									rpc_id(x , "updateTroops" , pressed , int(get_node("WorldMap/FadeIn/" + pressed + "/armycount").text))
+							if x != get_tree().get_network_unique_id():
+								rpc_id(x , "updateTroops" , pressed , int(get_node("WorldMap/FadeIn/" + pressed + "/armycount").text))
 						
 						$AddTroops/HMTroops.text = str(0)
 						$AddTroops/appear.play_backwards("appear")
-						get_node("WorldMap/FadeIn/" + pressed).modulate = mycolor
+						remoteModulate(pressed , mycolor)
 					
 				elif attackturn == true:
 					if pressed == null:
 						for x in range(countries.size()):
 							if get_node("WorldMap/FadeIn/" + countries[x]).is_pressed() and has_node("WorldMap/FadeIn/" + countries[x] + "/" + str(get_tree().get_network_unique_id())):
 								pressed = countries[x]
-								get_node("WorldMap/FadeIn/" + pressed).modulate = mycolor.darkened(0.3)
-								attackPressedDark(pressed)
+								remoteModulateDark(pressed , mycolor)
+								remoteAttackPressedDark(pressed , get_tree().get_network_unique_id())
 					else:
 						for x in range(countries.size()):
-							if get_node("WorldMap/FadeIn/" + countries[x]).is_pressed() and has_node("WorldMap/FadeIn/" + countries[x] + "/" + str(get_tree().get_network_unique_id())):
-								if countries[x] == pressed:
-									get_node("WorldMap/FadeIn/" + pressed).modulate = mycolor
-									attackPressedLight(pressed)
-									pressed = null
-									if $WorldMap/AttackButton.is_visible() == true:
-										$WorldMap/AttackButton/appear.play_backwards("appear")
-								
-								elif has_node("WorldMap/FadeIn/" + countries[x] + "/" + str(get_tree().get_network_unique_id())):
-									get_node("WorldMap/FadeIn/" + pressed).modulate = mycolor
-									get_node("WorldMap/FadeIn/" + countries[x]).modulate = mycolor.darkened(0.3)
-									attackPressedLight(pressed)
-									attackPressedDark(countries[x])
-									pressed = countries[x]
-									if $WorldMap/AttackButton.is_visible() == true:
-										$WorldMap/AttackButton/appear.play_backwards("appear")
-							
-							elif get_node("WorldMap/FadeIn/" + countries[x]).is_pressed()  and pressed != null:
-								for z in get_node("WorldMap/FadeIn/" + pressed + "/neighbours").get_children():
-									if z.name == countries[x]:
-										pressedattack = countries[x]
-										var node = get_node("WorldMap/FadeIn/" + str(countries[x]))
-										$WorldMap/AttackButton.set_position(Vector2(node.get_position().x + (node.get_size().x)/2 , node.get_position().y))
-										$WorldMap/AttackButton/appear.play("appear")
+							if timetoattack == false:
+								if get_node("WorldMap/FadeIn/" + countries[x]).is_pressed() and has_node("WorldMap/FadeIn/" + countries[x] + "/" + str(get_tree().get_network_unique_id())):
+									if countries[x] == pressed:
+										remoteModulate(pressed , mycolor)
+										remoteAttackPressed(pressed , get_tree().get_network_unique_id())
+										pressed = null
+										if $WorldMap/AttackButton.is_visible() == true:
+											$WorldMap/AttackButton/appear.play_backwards("appear")
 									
-						if $WorldMap/AttackButton.is_visible() and $WorldMap/AttackButton.is_pressed():
-							$WorldMap/AttackButton/appear.play_backwards("appear")	
-				
+									elif has_node("WorldMap/FadeIn/" + countries[x] + "/" + str(get_tree().get_network_unique_id())):
+										remoteModulate(pressed , mycolor)
+										remoteModulateDark(countries[x] , mycolor)
+										remoteAttackPressed(pressed , get_tree().get_network_unique_id())
+										remoteAttackPressedDark(countries[x] , get_tree().get_network_unique_id())
+										pressed = countries[x]
+										if $WorldMap/AttackButton.is_visible() == true:
+											$WorldMap/AttackButton/appear.play_backwards("appear")
+								
+								elif get_node("WorldMap/FadeIn/" + countries[x]).is_pressed()  and pressed != null:
+									for z in get_node("WorldMap/FadeIn/" + pressed + "/neighbours").get_children():
+										if z.name == countries[x]:
+											pressedattack = countries[x]
+											var node = get_node("WorldMap/FadeIn/" + str(countries[x]))
+											$WorldMap/AttackButton.set_position(Vector2(node.get_position().x + (node.get_size().x)/2 , node.get_position().y))
+											$WorldMap/AttackButton/appear.play("appear")
+											
+										
+							if $WorldMap/AttackButton.is_pressed():
+								
+								if int(get_node("WorldMap/FadeIn/" + pressed + "/armycount").text) < 2:
+									pass
+								else:
+									timetoattack = true
+									changeInfo("How many dice to throw")
+									rpc_id(int(get_node("WorldMap/FadeIn/" + pressedattack).get_children()[2].name) , "throwDice" , pressed , pressedattack)
+									
+									$WorldMap/AttackButton/appear.play_backwards("appear")
+									if int(get_node("WorldMap/FadeIn/" + pressed + "/armycount").text) == 2:
+										$AddDice/DiceSlider.max_value = 1
+									elif int(get_node("WorldMap/FadeIn/" + pressed + "/armycount").text) == 3:
+										$AddDice/DiceSlider.max_value = 2
+									else:
+										$AddDice/DiceSlider.max_value = 3
+									
+									var node = get_node("WorldMap/FadeIn/" + str(pressedattack))
+									$AddDice.set_position(Vector2(node.get_position().x + (node.get_size().x)/2 , node.get_position().y))
+									$AddDice/appear.play("appear")
 				
 				elif fortifyturn == true:
 					for x in range(countries.size()):
@@ -162,32 +188,54 @@ func _input(event):
 					placeturn = false
 					attackturn = true
 					if pressed != null:
-						get_node("WorldMap/FadeIn/" + pressed).modulate = mycolor
+						remoteModulate(pressed , mycolor)
 						pressed = null
 						if $AddTroops.is_visible():
-							$AddTroops/appear.play_backwards("appear")
-					changeLabelTurn("Attack")
+							$AddTroops.visible = false
+					changeLabelTurn("Fortify")
 
 					
-				elif $WorldMap/EndTurn.is_pressed() and attackturn == true:
+				elif $WorldMap/EndTurn.is_pressed() and attackturn == true and timetoattack == false:
 					attackturn = false
 					fortifyturn = true
 					if pressed != null:
+						remoteModulate(pressed , mycolor)
+						remoteAttackPressed(pressed , get_tree().get_network_unique_id())
 						pressed = null
-					changeLabelTurn("Fortify")
+					changeLabelTurn("End Turn")
 				
 				elif $WorldMap/EndTurn.is_pressed() and fortifyturn == true:
 					fortifyturn = false
 					$WorldMap/EndTurn.visible = false
 					$WorldMap/EndTurn/Fade.play_backwards("fade")
+					if getcard == true:
+						getCard()	
+						getcard = false
+						
 					if pressed != null:
-						get_node("WorldMap/FadeIn/" + pressed).modulate = mycolor
-						get_node("WorldMap/FadeIn/" + pressed).modulate = mycolor
+						remoteModulate(pressed , mycolor)
 						pressed = null
 					for x in GameState.playersingame:
 						if x != get_tree().get_network_unique_id():
 							rpc_id(x , "turnChange")
 					turnChange()
+				
+				if placeturn == true or fortifyturn == true:
+					for x in $WorldMap/CardHolder/CardsInHand.get_children():
+						if x.is_pressed():
+							if cardchecked.find(x) != -1:
+								cardchecked.erase(x)
+								x.set_position(Vector2(x.get_position().x , 700))
+								if $WorldMap/CardHolder/TradeIn.is_visible() == true:
+									$WorldMap/CardHolder/TradeIn.visible = false
+								print(cardchecked)
+							else:
+								cardchecked.append(x)
+								x.set_position(Vector2(x.get_position().x , 500))
+								print(cardchecked)
+								if cardchecked.size() == 3:
+									checkCombinations()
+							
 				
 	if $Lip.is_hovered() and hovered == false:
 		$Lip/Stats/hopping.play("hopping")
@@ -226,12 +274,14 @@ func _ready():
 	if get_tree().get_network_unique_id() == int(GameState.currentroominfo["gamehost"]):
 		for x in $WorldMap/FadeIn.get_children():
 			countries.append(x.name)
+			cards.append(x.name)
 		countries.shuffle()
-		
+		cards.shuffle()
+
 		for x in GameState.playersingame:
 			if x != get_tree().get_network_unique_id():
+				rpc_id(x , "updateCards" , cards)
 				rpc_id(x , "updateCountries" , countries)
-	
 		gameStart()
 	
 func gameStart():
@@ -302,11 +352,11 @@ remote func diceRoll(diceroll , playername , id , color):
 				rpc_id(x , "updateTurnInfo" , rolls)
 		updateTurnInfo(rolls)	
 		
-remote func updateScreenDice(dicenumber , playername , size):
+remote func updateScreenDice(dicenumber , playername , size):	
 	$WorldMap/holdDice.set_size(Vector2(GameState.playersingame.size()*150 , 200))
 	$WorldMap/holdDice.set_position(Vector2(1366/2 - ($WorldMap/holdDice.get_size().x)/2, 768/2 - ($WorldMap/holdDice.get_size().y)/2 - 10) )
 	$WorldMap/holdDice.visible = true
-	var texture = load("res://Textures/Dice/" + str(dicenumber) + ".jpg")
+	var texture = load("res://Textures/Dice/" + str(dicenumber) + ".png")
 	var sprite = Sprite.new()
 	var label = get_node("WorldMap/TempDice/temp").duplicate()
 	get_node("WorldMap/TempDice/").add_child(label)
@@ -365,7 +415,7 @@ remote func turnChange():
 				
 			print(infantry)
 			placeturn = true
-			changeLabelTurn("Place")
+			changeLabelTurn("Attack")
 	else:
 		changeInfo("Oponnent's Turn")
 		pass
@@ -387,30 +437,223 @@ func changeLabelTurn(text):
 
 func changePressed(country):
 	if country == pressed:
-		get_node("WorldMap/FadeIn/" + country).modulate = mycolor
+		remoteModulate(country , mycolor)
 		pressed = null
 	else:
 		if pressed != null:
-			get_node("WorldMap/FadeIn/" + pressed).modulate = mycolor
-		get_node("WorldMap/FadeIn/" + country).modulate = mycolor.darkened(0.3)
-		print(str(country) + " is toggled" )
+			remoteModulate(pressed , mycolor)
+		remoteModulateDark(country , mycolor)
 		pressed = country
-		print(pressed)
 
-func attackPressedDark(country):
+remote func attackPressedDark(country , id):
 	for x in get_node("WorldMap/FadeIn/" + country + "/neighbours").get_children():
-		if !(has_node("WorldMap/FadeIn/" + x.name + "/" + str(get_tree().get_network_unique_id()))):
+		if !(has_node("WorldMap/FadeIn/" + x.name + "/" + str(id))):
 			colortemp.append(get_node("WorldMap/FadeIn/" + x.name).get_modulate())
 			get_node("WorldMap/FadeIn/" + x.name).modulate = colortemp.back().darkened(0.3)
 
-func attackPressedLight(country):
+remote func attackPressedLight(pressed , id):
+
 	for x in get_node("WorldMap/FadeIn/" + pressed + "/neighbours").get_children():
-		if !(has_node("WorldMap/FadeIn/" + x.name + "/" + str(get_tree().get_network_unique_id()))):
+		if !(has_node("WorldMap/FadeIn/" + x.name + "/" + str(id))):
 			get_node("WorldMap/FadeIn/" + x.name).modulate = colortemp.pop_front()
+
+func remoteAttackPressed(countrypressed , id):
+	attackPressedLight(countrypressed , id)
+	for x in GameState.playersingame:
+		if x != get_tree().get_network_unique_id():
+			rpc_id(x , "attackPressedLight" , countrypressed , id)
+	
+func remoteAttackPressedDark(country , id ):
+	attackPressedDark(country , id)
+	for x in GameState.playersingame:
+		if x != get_tree().get_network_unique_id():
+			rpc_id(x , "attackPressedDark" , country , id)
+	
+remote func modulate(countr , color):
+	get_node("WorldMap/FadeIn/" + countr).modulate = color
+	
+remote func modulateDark(countr , color):
+	get_node("WorldMap/FadeIn/" + countr).modulate = color.darkened(0.3)
+
+func remoteModulate(countr , color):
+	modulate(countr , color)
+	for x in GameState.playersingame:
+		if x != get_tree().get_network_unique_id():
+			rpc_id(x , "modulate" , countr , color)
+	
+func remoteModulateDark(countr , color):
+	modulateDark(countr , color)
+	for x in GameState.playersingame:
+		if x != get_tree().get_network_unique_id():
+			rpc_id(x , "modulateDark" , countr , color)
 
 func _on_TroopsSlider_value_changed(value):
 	if placeturn == true:
 		$AddTroops/TroopsSlider.max_value = infantry
 		$AddTroops/HMTroops.text = str(value)
-	elif attackturn == true:
-		pass
+
+
+func _on_DiceSlider_value_changed(value):
+	$AddDice/HMDice.text = str($AddDice/DiceSlider.value)
+
+remote func throwDice(countryattacking , countryattacked):
+	changeInfo("Throw how many dice")
+	if int(get_node("WorldMap/FadeIn/" + countryattacked + "/armycount").text) == 1:
+		$AddDice/DiceSlider.max_value = 1
+	elif int(get_node("WorldMap/FadeIn/" + countryattacked + "/armycount").text) >= 2:
+		$AddDice/DiceSlider.max_value = 2
+	
+	var node = get_node("WorldMap/FadeIn/" + str(countryattacked))
+	$AddDice.set_position(Vector2(node.get_position().x + (node.get_size().x)/2 , node.get_position().y))
+	$AddDice/appear.play("appear")
+	rpcsenderid = get_tree().get_rpc_sender_id()
+	
+func _on_OkButton_pressed():
+	if rpcsenderid == null:
+		$AddDice/appear.play_backwards("appear")
+		while defenderdice.empty() == true:
+			yield(get_tree().create_timer(0.1), "timeout")
+		throwDiceAttack(int($AddDice/HMDice.text))
+		compareDice()
+		remoteAttackPressed(pressed , get_tree().get_network_unique_id())
+		remoteModulate(pressed , mycolor)
+		if int(get_node("WorldMap/FadeIn/" + pressedattack + "/armycount").text) == 0:
+			territories += 1
+			getcard = true
+			for x in GameState.playersingame:
+				if x != get_tree().get_network_unique_id():
+					rpc_id(x , "changeCountryId" , get_tree().get_network_unique_id() , mycolor , pressedattack)
+			changeCountryId(get_tree().get_network_unique_id() , mycolor , pressedattack)
+			var node = get_node("WorldMap/FadeIn/" + str(pressedattack))
+			$AddTroopsAttack.set_position(Vector2(node.get_position().x + (node.get_size().x)/2 , node.get_position().y))
+			$AddTroopsAttack/AttackSliderA.min_value = int($AddDice/HMDice.text)
+			$AddTroopsAttack/AttackSliderA.value = $AddTroopsAttack/AttackSliderA.min_value
+			$AddTroopsAttack/AttackSliderA.max_value = int(get_node("WorldMap/FadeIn/" + pressed + "/armycount").text) -1
+			$AddTroopsAttack/appear.play("appear")
+			
+		else:
+			timetoattack = false
+			pressed = null
+			pressedattack = null
+			attackerdice.clear()
+			defenderdice.clear()
+			changeInfo("Your Turn")
+		
+	else:
+		$AddDice/appear.play_backwards("appear")
+		rpc_id(rpcsenderid , "throwDiceDefend" , int($AddDice/HMDice.text))
+		changeInfo("Opponent's Turn")
+		rpcsenderid = null
+		
+remote func throwDiceDefend(diceamount):
+	for x in range(diceamount):
+		defenderdice.append(randi() % 6 + 1)
+
+func throwDiceAttack(diceamount):
+	for x in range(diceamount):
+		attackerdice.append(randi() % 6 + 1)
+
+func compareDice():
+	attackerdice.sort()
+	defenderdice.sort()
+	while defenderdice.empty() == false and attackerdice.empty() == false:
+		if attackerdice.max() <= defenderdice.max():
+			attackerdice.pop_back()
+			defenderdice.pop_back()
+			updateTroops(pressed , int(get_node("WorldMap/FadeIn/" + pressed + "/armycount").text)-1)
+			for x in GameState.playersingame:
+				if x != get_tree().get_network_unique_id():
+					rpc_id(x , "updateTroops" , pressed , int(get_node("WorldMap/FadeIn/" + pressed + "/armycount").text))
+		else:
+			attackerdice.pop_back()
+			defenderdice.pop_back()
+			updateTroops(pressedattack , int(get_node("WorldMap/FadeIn/" + pressedattack + "/armycount").text)-1)
+			for x in GameState.playersingame:
+				if x != get_tree().get_network_unique_id():
+					rpc_id(x , "updateTroops" , pressedattack , int(get_node("WorldMap/FadeIn/" + pressedattack + "/armycount").text))
+
+remote func changeCountryId(id , colors , countrytochange):
+	var tempnode = get_node("WorldMap/FadeIn/" + countrytochange)
+	tempnode.modulate = colors
+	if int(tempnode.get_children()[2].name) == get_tree().get_network_unique_id():
+		territories = territories - 1
+	tempnode.get_children()[2].name = str(id)
+	
+func _on_OkButtonA_pressed():
+	for x in GameState.playersingame:
+		if x != get_tree().get_network_unique_id():
+			rpc_id(x , "updateTroops" , pressed , str(int(get_node("WorldMap/FadeIn/" + pressed + "/armycount").text) - int($AddTroopsAttack/HMTroopsAttack.text)))
+			rpc_id(x , "updateTroops" , pressedattack , $AddTroopsAttack/HMTroopsAttack.text)
+	updateTroops(pressed , str(int(get_node("WorldMap/FadeIn/" + pressed + "/armycount").text) - int($AddTroopsAttack/HMTroopsAttack.text)))
+	updateTroops(pressedattack , $AddTroopsAttack/HMTroopsAttack.text)
+	$AddTroopsAttack/appear.play_backwards("appear")
+	timetoattack = false
+	pressed = null
+	pressedattack = null
+	attackerdice.clear()
+	defenderdice.clear()
+	changeInfo("Your Turn")
+	
+func _on_AttackSliderA_value_changed(value):
+	$AddTroopsAttack/HMTroopsAttack.text = str(value)
+
+func _on_CardHolder_pressed():
+	if cardsinhand.empty() == false:
+		if cardspressed == false:
+			var count = int(-cardsinhand.size()/2)
+			for x in $WorldMap/CardHolder/CardsInHand.get_children():
+				x.set_position(Vector2(get_tree().get_root().get_size().x/2 + count*50 - (x.get_size().x)/2, 700))
+				x.visible = true
+				if cardsinhand.size() % 2 == 0:
+					if count == -1:
+						count += 2
+					else:
+						count += 1
+				else:
+					count += 1
+			cardspressed = true
+		else:
+			for x in $WorldMap/CardHolder/CardsInHand.get_children():
+				x.visible = false
+			cardspressed = false
+		
+func getCard():
+	cardsinhand.append(cards.pop_front())
+	print(cardsinhand)
+	$WorldMap/CardHolder/CardsInHand.add_child(get_node("Cards/" + str(cardsinhand.back())).duplicate())
+	for x in GameState.playersingame:
+		if x != get_tree().get_network_unique_id():
+			rpc_id(x , "updateCards" , cards)
+	
+			
+remote func updateCards(updatedcards):
+	cards = updatedcards
+
+func checkCombinations():
+	if cardchecked[0].get_child(0).name == cardchecked[1].get_child(0).name and cardchecked[1].get_child(0).name ==  cardchecked[2].get_child(0).name:
+		$WorldMap/CardHolder/TradeIn.visible = true
+	elif cardchecked[0].get_child(0).name != cardchecked[1].get_child(0).name and cardchecked[1].get_child(0).name != cardchecked[2].get_child(0).name:
+		$WorldMap/CardHolder/TradeIn.visible = true
+		
+
+func _on_TradeIn_pressed():
+	$WorldMap/CardHolder/TradeIn.visible = false
+	infantry += infantrycards
+	plusInfantryCards()
+	queueFreeCard()
+	cardchecked.clear()
+	
+	
+func plusInfantryCards():
+	for y in cardchecked:
+		for x in $WorldMap/FadeIn.get_children():
+			if x.name == y.name:
+				x.get_child(0).text = str(int(x.get_child(0).text) + 2)
+				return
+
+func queueFreeCard():
+	for y in cardchecked:
+		for x in $WorldMap/CardHolder/CardsInHand.get_children():
+			if x.name == y.name:
+				x.queue_free()
+	
