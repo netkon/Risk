@@ -20,6 +20,7 @@ var attackturn
 var fortifyturn
 var colortemp = []
 var pressedattack
+var pressedmove
 var timetoattack = false
 var rpcsenderid
 var defenderdice = []
@@ -30,6 +31,7 @@ var getcard = false
 var cardspressed = false
 var cardchecked = []
 var infantrycards = 4
+var movingdone = false
 
 func _process(delta):
 	pass
@@ -59,7 +61,7 @@ func _input(event):
 
 					if $WorldMap/EndTurn.is_pressed():
 						if pressed != null:
-							infantry = infantry -1
+							addInfantry(-1)
 							var ntroops = int(get_node("WorldMap/FadeIn/" + pressed + "/armycount").text)
 							ntroops += 1
 							get_node("WorldMap/FadeIn/" + pressed + "/armycount").text = str(ntroops)
@@ -113,12 +115,12 @@ func _input(event):
 						
 					if $AddTroops.is_visible() and (Input.is_key_pressed(KEY_ENTER) or $AddTroops/OkButton.is_pressed()) and int($AddTroops/HMTroops.text) <= infantry:
 						get_node("WorldMap/FadeIn/" + pressed + "/armycount").text = str(int(get_node("WorldMap/FadeIn/" + pressed + "/armycount").text) + int($AddTroops/HMTroops.text))
-						infantry = infantry - int($AddTroops/HMTroops.text)
+						addInfantry(-int($AddTroops/HMTroops.text))
 						for x in GameState.playersingame:
 							if x != get_tree().get_network_unique_id():
 								rpc_id(x , "updateTroops" , pressed , int(get_node("WorldMap/FadeIn/" + pressed + "/armycount").text))
 						
-						$AddTroops/HMTroops.text = str(0)
+						#$AddTroops/HMTroops.text = str(0)
 						$AddTroops/appear.play_backwards("appear")
 						remoteModulate(pressed , mycolor)
 					
@@ -179,11 +181,45 @@ func _input(event):
 									$AddDice.set_position(Vector2(node.get_position().x + (node.get_size().x)/2 , node.get_position().y))
 									$AddDice/appear.play("appear")
 				
-				elif fortifyturn == true:
-					for x in range(countries.size()):
-						if get_node("WorldMap/FadeIn/" + countries[x]).is_pressed() and has_node("WorldMap/FadeIn/" + countries[x] + "/" + str(get_tree().get_network_unique_id())):
-							changePressed(countries[x])
-			
+				elif fortifyturn == true and movingdone == false:
+					if pressed == null:
+						for x in range(countries.size()):
+							if get_node("WorldMap/FadeIn/" + countries[x]).is_pressed() and has_node("WorldMap/FadeIn/" + countries[x] + "/" + str(get_tree().get_network_unique_id())) and int(get_node(("WorldMap/FadeIn/" + countries[x] + "/armycount")).text) > 1:
+								pressed = countries[x]
+								remoteModulateDark(pressed , mycolor)
+								remoteMovePressedDark(pressed , get_tree().get_network_unique_id())
+					else:
+						for x in range(countries.size()):
+							if get_node("WorldMap/FadeIn/" + countries[x]).is_pressed() and has_node("WorldMap/FadeIn/" + countries[x] + "/" + str(get_tree().get_network_unique_id())):
+								if countries[x] == pressed and int(get_node(("WorldMap/FadeIn/" + countries[x] + "/armycount")).text) > 1:
+									remoteModulate(pressed , mycolor)
+									remoteMovePressed(pressed , get_tree().get_network_unique_id())
+									pressed = null
+									if $AddTroopsMove.is_visible() == true:
+											$AddTroopsMove/appear.play_backwards("appear")
+									
+								elif has_node("WorldMap/FadeIn/" + countries[x] + "/" + str(get_tree().get_network_unique_id())) and pressed != null:
+									var no = false
+									for z in get_node("WorldMap/FadeIn/" + pressed + "/neighbours").get_children():
+										if z.name == countries[x]:
+											no = true
+											pressedmove = countries[x]
+											var node = get_node("WorldMap/FadeIn/" + str(countries[x]))
+											$AddTroopsMove/MovekSliderM.min_value = 1
+											$AddTroopsMove/MovekSliderM.max_value = int(get_node(("WorldMap/FadeIn/" + pressed + "/armycount")).text)-1
+											$AddTroopsMove/MovekSliderM.value = 1
+											$AddTroopsMove.set_position(Vector2(node.get_position().x + (node.get_size().x)/2 , node.get_position().y))
+											$AddTroopsMove/appear.play("appear")
+
+									if no == false and int(get_node(("WorldMap/FadeIn/" + countries[x] + "/armycount")).text) > 1:
+										remoteModulate(pressed , mycolor)
+										remoteMovePressed(pressed , get_tree().get_network_unique_id())
+										remoteMovePressedDark(countries[x] , get_tree().get_network_unique_id())
+										remoteModulateDark(countries[x] , mycolor)
+										pressed = countries[x]
+										if $AddTroopsMove.is_visible() == true:
+											$AddTroopsMove/appear.play_backwards("appear")
+										
 				if 	$WorldMap/EndTurn.is_pressed() and placeturn == true:
 					placeturn = false
 					attackturn = true
@@ -191,7 +227,7 @@ func _input(event):
 						remoteModulate(pressed , mycolor)
 						pressed = null
 						if $AddTroops.is_visible():
-							$AddTroops.visible = false
+							$AddTroops/appear.play_backwards("appear")
 					changeLabelTurn("Fortify")
 
 					
@@ -206,15 +242,21 @@ func _input(event):
 				
 				elif $WorldMap/EndTurn.is_pressed() and fortifyturn == true:
 					fortifyturn = false
+					movingdone = false
 					$WorldMap/EndTurn.visible = false
 					$WorldMap/EndTurn/Fade.play_backwards("fade")
+					if $AddTroopsMove.is_visible() == true:
+						$AddTroopsMove/appear.play_backwards("appear")
+											
 					if getcard == true:
 						getCard()	
 						getcard = false
 						
 					if pressed != null:
 						remoteModulate(pressed , mycolor)
+						remoteMovePressed(pressed , get_tree().get_network_unique_id())
 						pressed = null
+					
 					for x in GameState.playersingame:
 						if x != get_tree().get_network_unique_id():
 							rpc_id(x , "turnChange")
@@ -314,7 +356,7 @@ func setCountryColor(id , position):
 		var playerid = Label.new()
 		playerid.name = str(id)
 		if id == get_tree().get_network_unique_id():
-			infantry = infantry -1
+			addInfantry(-1)
 			territories = territories +1
 		get_node("WorldMap/FadeIn/" + str(countries[count])).modulate = colors[position]
 		get_node("WorldMap/FadeIn/" + str(countries[count])).add_child(playerid)
@@ -409,9 +451,9 @@ remote func turnChange():
 		changeInfo("Your Turn")
 		if fasedistribuicao == false:
 			if territories <= 9:
-				infantry = infantry +3
+				addInfantry(3)
 			else:
-				infantry = infantry + int(territories/3)
+				addInfantry(int(territories/3))
 				
 			print(infantry)
 			placeturn = true
@@ -424,7 +466,6 @@ func changeInfo(word):
 	$Info.text = word
 	$Info/fade.play("fade")
 
-	
 remote func updateTroops(country , number):
 	get_node("WorldMap/FadeIn/" + country + "/armycount").text = str(number)
 
@@ -469,6 +510,29 @@ func remoteAttackPressedDark(country , id ):
 		if x != get_tree().get_network_unique_id():
 			rpc_id(x , "attackPressedDark" , country , id)
 	
+remote func movePressedDark(country , id):
+	for x in get_node("WorldMap/FadeIn/" + country + "/neighbours").get_children():
+		if (has_node("WorldMap/FadeIn/" + x.name + "/" + str(id))):
+			colortemp.append(get_node("WorldMap/FadeIn/" + x.name).get_modulate())
+			get_node("WorldMap/FadeIn/" + x.name).modulate = colortemp.back().darkened(0.3)
+
+remote func movePressedLight(pressed , id):
+	for x in get_node("WorldMap/FadeIn/" + pressed + "/neighbours").get_children():
+		if (has_node("WorldMap/FadeIn/" + x.name + "/" + str(id))):
+			get_node("WorldMap/FadeIn/" + x.name).modulate = colortemp.pop_front()
+
+func remoteMovePressed(countrypressed , id):
+	movePressedLight(countrypressed , id)
+	for x in GameState.playersingame:
+		if x != get_tree().get_network_unique_id():
+			rpc_id(x , "movePressedLight" , countrypressed , id)
+	
+func remoteMovePressedDark(country , id ):
+	movePressedDark(country , id)
+	for x in GameState.playersingame:
+		if x != get_tree().get_network_unique_id():
+			rpc_id(x , "movePressedDark" , country , id)
+			
 remote func modulate(countr , color):
 	get_node("WorldMap/FadeIn/" + countr).modulate = color
 	
@@ -491,7 +555,6 @@ func _on_TroopsSlider_value_changed(value):
 	if placeturn == true:
 		$AddTroops/TroopsSlider.max_value = infantry
 		$AddTroops/HMTroops.text = str(value)
-
 
 func _on_DiceSlider_value_changed(value):
 	$AddDice/HMDice.text = str($AddDice/DiceSlider.value)
@@ -621,11 +684,12 @@ func getCard():
 	cardsinhand.append(cards.pop_front())
 	print(cardsinhand)
 	$WorldMap/CardHolder/CardsInHand.add_child(get_node("Cards/" + str(cardsinhand.back())).duplicate())
+	_on_CardHolder_pressed()
+	_on_CardHolder_pressed()
 	for x in GameState.playersingame:
 		if x != get_tree().get_network_unique_id():
 			rpc_id(x , "updateCards" , cards)
-	
-			
+		
 remote func updateCards(updatedcards):
 	cards = updatedcards
 
@@ -635,14 +699,13 @@ func checkCombinations():
 	elif cardchecked[0].get_child(0).name != cardchecked[1].get_child(0).name and cardchecked[1].get_child(0).name != cardchecked[2].get_child(0).name:
 		$WorldMap/CardHolder/TradeIn.visible = true
 		
-
 func _on_TradeIn_pressed():
 	$WorldMap/CardHolder/TradeIn.visible = false
 	infantry += infantrycards
+	infantrycards += 2
 	plusInfantryCards()
 	queueFreeCard()
 	cardchecked.clear()
-	
 	
 func plusInfantryCards():
 	for y in cardchecked:
@@ -656,4 +719,27 @@ func queueFreeCard():
 		for x in $WorldMap/CardHolder/CardsInHand.get_children():
 			if x.name == y.name:
 				x.queue_free()
+
+func addInfantry(amount):
+	infantry = infantry + amount
+
+func _on_MovekSliderM_value_changed(value):
+	$AddTroopsMove/HMTroopsMove.text = str(value)
+	
+func _on_OkButtonM_pressed():
+	for x in GameState.playersingame:
+		if x != get_tree().get_network_unique_id():
+			rpc_id(x , "updateTroops" , pressed , int(get_node("WorldMap/FadeIn/" + pressed + "/armycount").text) - int($AddTroopsMove/HMTroopsMove.text))
+	updateTroops(pressed , int(get_node("WorldMap/FadeIn/" + pressed + "/armycount").text) - int($AddTroopsMove/HMTroopsMove.text))
+			
+	for x in GameState.playersingame:
+		if x != get_tree().get_network_unique_id():
+			rpc_id(x , "updateTroops" , pressedmove , int(get_node("WorldMap/FadeIn/" + pressedmove + "/armycount").text) + int($AddTroopsMove/HMTroopsMove.text))
+	updateTroops(pressedmove , int(get_node("WorldMap/FadeIn/" + pressedmove + "/armycount").text) + int($AddTroopsMove/HMTroopsMove.text))
+	$AddTroopsMove/appear.play_backwards("appear")
+	remoteModulate(pressed , mycolor)
+	remoteMovePressed(pressed , get_tree().get_network_unique_id())
+	pressed = null
+	pressedmove = null
+	movingdone = true
 	
