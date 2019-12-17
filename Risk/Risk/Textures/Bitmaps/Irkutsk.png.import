@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/Irkutsk.png-02a40b11a8eeb3d69c2c971bd1d78117.res"
+
+[deps]
+
+source_file="res://Textures/Bitmaps/Irkutsk.png"
+dest_files=[ "res://.import/Irkutsk.png-02a40b11a8eeb3d69c2c971bd1d78117.res" ]
+
+[params]
+
+create_from=1
+threshold=0.5

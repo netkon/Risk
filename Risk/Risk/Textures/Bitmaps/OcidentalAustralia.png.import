@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/OcidentalAustralia.png-24cd570c45c429d0d65eb8217df5d3d8.res"
+
+[deps]
+
+source_file="res://Textures/Bitmaps/OcidentalAustralia.png"
+dest_files=[ "res://.import/OcidentalAustralia.png-24cd570c45c429d0d65eb8217df5d3d8.res" ]
+
+[params]
+
+create_from=1
+threshold=0.5

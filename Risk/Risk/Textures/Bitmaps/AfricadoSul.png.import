@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/AfricadoSul.png-32374bc4921d2dd354a043ba4a15547c.res"
+
+[deps]
+
+source_file="res://Textures/Bitmaps/AfricadoSul.png"
+dest_files=[ "res://.import/AfricadoSul.png-32374bc4921d2dd354a043ba4a15547c.res" ]
+
+[params]
+
+create_from=1
+threshold=0.5

@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/Ucrania.png-eb2b8e3a08fa27398fadd284e48da386.res"
+
+[deps]
+
+source_file="res://Textures/Bitmaps/Ucrania.png"
+dest_files=[ "res://.import/Ucrania.png-eb2b8e3a08fa27398fadd284e48da386.res" ]
+
+[params]
+
+create_from=1
+threshold=0.5

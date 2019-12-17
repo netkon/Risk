@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/AmericaCentral.png-3223ce7a69afcc833fe9d085c744781b.res"
+
+[deps]
+
+source_file="res://Textures/Bitmaps/AmericaCentral.png"
+dest_files=[ "res://.import/AmericaCentral.png-3223ce7a69afcc833fe9d085c744781b.res" ]
+
+[params]
+
+create_from=1
+threshold=0.5

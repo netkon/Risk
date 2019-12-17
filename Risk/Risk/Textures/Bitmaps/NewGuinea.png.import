@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/NewGuinea.png-3f43919ea5491d748ba91ce44aa68a7c.res"
+
+[deps]
+
+source_file="res://Textures/Bitmaps/NewGuinea.png"
+dest_files=[ "res://.import/NewGuinea.png-3f43919ea5491d748ba91ce44aa68a7c.res" ]
+
+[params]
+
+create_from=1
+threshold=0.5

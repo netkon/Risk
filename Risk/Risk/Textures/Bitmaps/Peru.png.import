@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/Peru.png-d4b1bf0f09a26397f4216b2b0e5d8eaf.res"
+
+[deps]
+
+source_file="res://Textures/Bitmaps/Peru.png"
+dest_files=[ "res://.import/Peru.png-d4b1bf0f09a26397f4216b2b0e5d8eaf.res" ]
+
+[params]
+
+create_from=1
+threshold=0.5

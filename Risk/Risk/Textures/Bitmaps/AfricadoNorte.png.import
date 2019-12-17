@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/AfricadoNorte.png-041d3ec05a04ce3f41b42d0caf55ce3d.res"
+
+[deps]
+
+source_file="res://Textures/Bitmaps/AfricadoNorte.png"
+dest_files=[ "res://.import/AfricadoNorte.png-041d3ec05a04ce3f41b42d0caf55ce3d.res" ]
+
+[params]
+
+create_from=1
+threshold=0.5

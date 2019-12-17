@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/Alaska.png-6eb4497b1c53c889ebe8d5d336ee22e8.res"
+
+[deps]
+
+source_file="res://Textures/Bitmaps/Alaska.png"
+dest_files=[ "res://.import/Alaska.png-6eb4497b1c53c889ebe8d5d336ee22e8.res" ]
+
+[params]
+
+create_from=1
+threshold=0.5

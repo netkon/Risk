@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/Mongolia.png-19a01ab32e82cc1347c58e4bd6fde2b5.res"
+
+[deps]
+
+source_file="res://Textures/Bitmaps/Mongolia.png"
+dest_files=[ "res://.import/Mongolia.png-19a01ab32e82cc1347c58e4bd6fde2b5.res" ]
+
+[params]
+
+create_from=1
+threshold=0.5

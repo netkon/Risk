@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/USAE.png-af14059163edd24e84c20256683ffdc6.res"
+
+[deps]
+
+source_file="res://Textures/Bitmaps/USAE.png"
+dest_files=[ "res://.import/USAE.png-af14059163edd24e84c20256683ffdc6.res" ]
+
+[params]
+
+create_from=1
+threshold=0.5

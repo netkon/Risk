@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/Japo.png-bf50d8f79c74784c0bc2144c2ac9579c.res"
+
+[deps]
+
+source_file="res://Textures/Bitmaps/Japo.png"
+dest_files=[ "res://.import/Japo.png-bf50d8f79c74784c0bc2144c2ac9579c.res" ]
+
+[params]
+
+create_from=1
+threshold=0.5

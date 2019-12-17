@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/EuropadoSul.png-cbb55168c42e491313d3221f31e35082.res"
+
+[deps]
+
+source_file="res://Textures/Bitmaps/EuropadoSul.png"
+dest_files=[ "res://.import/EuropadoSul.png-cbb55168c42e491313d3221f31e35082.res" ]
+
+[params]
+
+create_from=1
+threshold=0.5

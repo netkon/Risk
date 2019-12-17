@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/Congo.png-cfd33dca9f18690e2f8c2f0dc979a775.res"
+
+[deps]
+
+source_file="res://Textures/Bitmaps/Congo.png"
+dest_files=[ "res://.import/Congo.png-cfd33dca9f18690e2f8c2f0dc979a775.res" ]
+
+[params]
+
+create_from=1
+threshold=0.5

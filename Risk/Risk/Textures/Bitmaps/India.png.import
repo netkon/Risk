@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/India.png-ee97019ea1498ae3faa2a577bf18ea2b.res"
+
+[deps]
+
+source_file="res://Textures/Bitmaps/India.png"
+dest_files=[ "res://.import/India.png-ee97019ea1498ae3faa2a577bf18ea2b.res" ]
+
+[params]
+
+create_from=1
+threshold=0.5

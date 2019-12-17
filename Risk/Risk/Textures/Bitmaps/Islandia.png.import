@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/Islandia.png-be41153209b407c61ad230760ed610c2.res"
+
+[deps]
+
+source_file="res://Textures/Bitmaps/Islandia.png"
+dest_files=[ "res://.import/Islandia.png-be41153209b407c61ad230760ed610c2.res" ]
+
+[params]
+
+create_from=1
+threshold=0.5

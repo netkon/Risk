@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/GreatBritain.png-9f2a437264fa50373359961ee9301bf7.res"
+
+[deps]
+
+source_file="res://Textures/Bitmaps/GreatBritain.png"
+dest_files=[ "res://.import/GreatBritain.png-9f2a437264fa50373359961ee9301bf7.res" ]
+
+[params]
+
+create_from=1
+threshold=0.5

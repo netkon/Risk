@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/Siberia.png-496f7ebbd5406e1262ea32fc788d7ddb.res"
+
+[deps]
+
+source_file="res://Textures/Bitmaps/Siberia.png"
+dest_files=[ "res://.import/Siberia.png-496f7ebbd5406e1262ea32fc788d7ddb.res" ]
+
+[params]
+
+create_from=1
+threshold=0.5

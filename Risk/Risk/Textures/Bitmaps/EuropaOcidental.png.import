@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/EuropaOcidental.png-07c3c69cf86ab095a132e56c59e1941e.res"
+
+[deps]
+
+source_file="res://Textures/Bitmaps/EuropaOcidental.png"
+dest_files=[ "res://.import/EuropaOcidental.png-07c3c69cf86ab095a132e56c59e1941e.res" ]
+
+[params]
+
+create_from=1
+threshold=0.5

@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/Siam.png-bb284d5dd7c04f30f91a99d22574edfc.res"
+
+[deps]
+
+source_file="res://Textures/Bitmaps/Siam.png"
+dest_files=[ "res://.import/Siam.png-bb284d5dd7c04f30f91a99d22574edfc.res" ]
+
+[params]
+
+create_from=1
+threshold=0.5

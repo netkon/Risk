@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/Argentina.png-d3df94db0aa96ec2ff5c2ccbabf4137b.res"
+
+[deps]
+
+source_file="res://Textures/Bitmaps/Argentina.png"
+dest_files=[ "res://.import/Argentina.png-d3df94db0aa96ec2ff5c2ccbabf4137b.res" ]
+
+[params]
+
+create_from=1
+threshold=0.5

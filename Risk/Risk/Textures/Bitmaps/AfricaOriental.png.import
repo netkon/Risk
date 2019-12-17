@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/AfricaOriental.png-ce7f1a01e72cb6f2f55751e2bf4ff7a9.res"
+
+[deps]
+
+source_file="res://Textures/Bitmaps/AfricaOriental.png"
+dest_files=[ "res://.import/AfricaOriental.png-ce7f1a01e72cb6f2f55751e2bf4ff7a9.res" ]
+
+[params]
+
+create_from=1
+threshold=0.5

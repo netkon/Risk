@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/Escandinavia.png-a2979be21f0c8109b5564831a011f690.res"
+
+[deps]
+
+source_file="res://Textures/Bitmaps/Escandinavia.png"
+dest_files=[ "res://.import/Escandinavia.png-a2979be21f0c8109b5564831a011f690.res" ]
+
+[params]
+
+create_from=1
+threshold=0.5

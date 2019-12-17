@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/GreenLand.png-ca586159b2474df40a952a87c77ca5c1.res"
+
+[deps]
+
+source_file="res://Textures/Bitmaps/GreenLand.png"
+dest_files=[ "res://.import/GreenLand.png-ca586159b2474df40a952a87c77ca5c1.res" ]
+
+[params]
+
+create_from=1
+threshold=0.5
