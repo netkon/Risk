@@ -1,4 +1,4 @@
-[gd_scene load_steps=170 format=2]
+[gd_scene load_steps=174 format=2]
 
 [ext_resource path="res://Scripts/Risk.gd" type="Script" id=1]
 [ext_resource path="res://Textures/RiskMapTextures/trytry.jpg" type="Texture" id=2]
@@ -144,6 +144,8 @@
 [ext_resource path="res://Textures/CartasTerritorios/QuebecInf.png" type="Texture" id=142]
 [ext_resource path="res://Textures/CartasTerritorios/LakutskInf.png" type="Texture" id=143]
 [ext_resource path="res://Textures/backbutton.png" type="Texture" id=144]
+[ext_resource path="res://Textures/Troops.png" type="Texture" id=145]
+[ext_resource path="res://Textures/NumbTroopsHolder.png" type="Texture" id=146]
 
 [sub_resource type="DynamicFont" id=1]
 size = 80
@@ -302,6 +304,26 @@ use_filter = true
 font_data = ExtResource( 87 )
 
 [sub_resource type="DynamicFont" id=12]
+size = 125
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 87 )
+
+[sub_resource type="Animation" id=13]
+resource_name = "appear"
+length = 0.3
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3 )
+}
+
+[sub_resource type="DynamicFont" id=14]
 size = 30
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
@@ -309,7 +331,7 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 87 )
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=15]
 length = 0.6
 tracks/0/type = "bezier"
 tracks/0/path = NodePath(".:self_modulate:a")
@@ -322,7 +344,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.6 )
 }
 
-[sub_resource type="DynamicFont" id=14]
+[sub_resource type="DynamicFont" id=16]
 size = 40
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
@@ -330,7 +352,7 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 87 )
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=17]
 length = 0.3
 tracks/0/type = "bezier"
 tracks/0/path = NodePath(".:rect_scale:x")
@@ -343,7 +365,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3 )
 }
 
-[sub_resource type="DynamicFont" id=16]
+[sub_resource type="DynamicFont" id=18]
 size = 50
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
@@ -351,7 +373,7 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 87 )
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=19]
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -378,7 +400,7 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=20]
 length = 0.7
 tracks/0/type = "bezier"
 tracks/0/path = NodePath(".:self_modulate:a")
@@ -391,68 +413,12 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.7 )
 }
 
-[sub_resource type="DynamicFont" id=19]
+[sub_resource type="DynamicFont" id=21]
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 87 )
-
-[sub_resource type="Animation" id=20]
-length = 0.1
-step = 0.01
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:rect_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.03, 0.1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, true ]
-}
-
-[sub_resource type="Animation" id=21]
-length = 0.1
-step = 0.01
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:rect_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.03, 0.1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, true ]
-}
 
 [sub_resource type="Animation" id=22]
 length = 0.1
@@ -484,6 +450,62 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=23]
 length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.03, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, true ]
+}
+
+[sub_resource type="Animation" id=24]
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.03, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, true ]
+}
+
+[sub_resource type="Animation" id=25]
+length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rect_scale")
 tracks/0/interp = 1
@@ -509,14 +531,13 @@ tracks/1/keys = {
 "values": [ false, true, true ]
 }
 
-[sub_resource type="DynamicFont" id=24]
+[sub_resource type="DynamicFont" id=26]
 size = 38
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 87 )
 
-[sub_resource type="Animation" id=25]
-resource_name = "New Anim"
+[sub_resource type="Animation" id=27]
 tracks/0/type = "bezier"
 tracks/0/path = NodePath(".:modulate:a")
 tracks/0/interp = 1
@@ -1919,7 +1940,7 @@ anims/PopIn = SubResource( 4 )
 
 [node name="EndTurn" type="TextureButton" parent="WorldMap"]
 visible = false
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color( 1, 1, 1, 0.01 )
 margin_left = 1035.25
 margin_top = 651.696
 margin_right = 1790.25
@@ -1964,22 +1985,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="holdDice" type="Panel" parent="WorldMap"]
-visible = false
-self_modulate = Color( 1, 1, 1, 0.909804 )
-margin_left = 477.0
-margin_top = 217.0
-margin_right = 877.0
-margin_bottom = 268.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Panel" type="Panel" parent="WorldMap/holdDice"]
-visible = false
-margin_right = 401.0
-margin_bottom = 46.0
-
 [node name="AttackButton" type="TextureButton" parent="WorldMap"]
 visible = false
 modulate = Color( 1, 1, 1, 0 )
@@ -2010,11 +2015,12 @@ __meta__ = {
 anims/appear = SubResource( 9 )
 
 [node name="CardHolder" type="TextureButton" parent="WorldMap"]
+visible = false
 self_modulate = Color( 1, 1, 1, 0 )
-margin_left = 7.49652
-margin_top = 631.765
-margin_right = 374.497
-margin_bottom = 998.765
+margin_left = 5.0
+margin_top = 500.0
+margin_right = 372.0
+margin_bottom = 867.0
 rect_scale = Vector2( 0.32, 0.35 )
 texture_normal = ExtResource( 92 )
 __meta__ = {
@@ -2040,11 +2046,41 @@ __meta__ = {
 
 [node name="GraveYard" type="Node" parent="WorldMap"]
 
+[node name="TroopsCount" type="Sprite" parent="WorldMap"]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 5, 635 )
+scale = Vector2( 0.32, 0.35 )
+texture = ExtResource( 145 )
+centered = false
+
+[node name="Sprite" type="Sprite" parent="WorldMap/TroopsCount"]
+show_behind_parent = true
+position = Vector2( 405.419, 94.6903 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 146 )
+
+[node name="TroopCount" type="Label" parent="WorldMap/TroopsCount"]
+margin_left = 317.448
+margin_top = 10.0048
+margin_right = 523.448
+margin_bottom = 163.005
+custom_fonts/font = SubResource( 12 )
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="appear" type="AnimationPlayer" parent="WorldMap/TroopsCount"]
+anims/appear = SubResource( 13 )
+
 [node name="Info" type="Label" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
 margin_right = 1366.0
 margin_bottom = 60.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 14 )
 align = 1
 valign = 1
 __meta__ = {
@@ -2053,7 +2089,7 @@ __meta__ = {
 }
 
 [node name="fade" type="AnimationPlayer" parent="Info"]
-anims/fade = SubResource( 13 )
+anims/fade = SubResource( 15 )
 
 [node name="Lip" type="TextureButton" parent="."]
 margin_left = 1340.99
@@ -2093,24 +2129,23 @@ margin_right = 72.1759
 margin_bottom = 2935.57
 rect_rotation = 360.0
 rect_scale = Vector2( 2.5, 1 )
-custom_fonts/font = SubResource( 14 )
+custom_fonts/font = SubResource( 16 )
 text = "Turn order"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="hopping" type="AnimationPlayer" parent="Lip/Stats"]
-anims/hopping = SubResource( 15 )
+anims/hopping = SubResource( 17 )
 
 [node name="Turn" type="Label" parent="."]
-visible = false
 modulate = Color( 1, 1, 1, 0 )
 margin_top = 141.0
 margin_right = 1366.0
 margin_bottom = 203.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = SubResource( 16 )
+custom_fonts/font = SubResource( 18 )
 align = 1
 valign = 1
 __meta__ = {
@@ -2118,7 +2153,7 @@ __meta__ = {
 }
 
 [node name="Fade1" type="AnimationPlayer" parent="Turn"]
-anims/fade = SubResource( 17 )
+anims/fade = SubResource( 19 )
 
 [node name="Panel" type="Panel" parent="Turn"]
 visible = false
@@ -2148,7 +2183,7 @@ __meta__ = {
 }
 
 [node name="DarkFadein" type="AnimationPlayer" parent="Dark"]
-anims/fade = SubResource( 18 )
+anims/fade = SubResource( 20 )
 
 [node name="AddTroops" type="Panel" parent="."]
 visible = false
@@ -2194,7 +2229,7 @@ margin_top = 2.0
 margin_right = 94.0
 margin_bottom = 33.0
 rect_scale = Vector2( 1, 0.9 )
-custom_fonts/font = SubResource( 19 )
+custom_fonts/font = SubResource( 21 )
 text = "1"
 max_length = 2
 __meta__ = {
@@ -2202,7 +2237,7 @@ __meta__ = {
 }
 
 [node name="appear" type="AnimationPlayer" parent="AddTroops"]
-anims/appear = SubResource( 20 )
+anims/appear = SubResource( 22 )
 
 [node name="TroopsSlider" type="HSlider" parent="AddTroops"]
 margin_left = 1.0
@@ -2269,7 +2304,7 @@ margin_top = 2.0
 margin_right = 94.0
 margin_bottom = 33.0
 rect_scale = Vector2( 1, 0.9 )
-custom_fonts/font = SubResource( 19 )
+custom_fonts/font = SubResource( 21 )
 text = "1"
 max_length = 2
 __meta__ = {
@@ -2277,7 +2312,7 @@ __meta__ = {
 }
 
 [node name="appear" type="AnimationPlayer" parent="AddTroopsAttack"]
-anims/appear = SubResource( 21 )
+anims/appear = SubResource( 23 )
 
 [node name="AttackSliderA" type="HSlider" parent="AddTroopsAttack"]
 margin_left = 1.0
@@ -2323,7 +2358,7 @@ margin_top = 2.0
 margin_right = 124.0
 margin_bottom = 33.0
 rect_scale = Vector2( 1, 0.9 )
-custom_fonts/font = SubResource( 19 )
+custom_fonts/font = SubResource( 21 )
 text = "1"
 max_length = 2
 __meta__ = {
@@ -2331,7 +2366,7 @@ __meta__ = {
 }
 
 [node name="appear" type="AnimationPlayer" parent="AddTroopsMove"]
-anims/appear = SubResource( 22 )
+anims/appear = SubResource( 24 )
 
 [node name="MovekSliderM" type="HSlider" parent="AddTroopsMove"]
 margin_left = 1.0
@@ -2377,7 +2412,7 @@ margin_top = 1.65944
 margin_right = 63.3494
 margin_bottom = 32.6594
 rect_scale = Vector2( 1, 0.9 )
-custom_fonts/font = SubResource( 19 )
+custom_fonts/font = SubResource( 21 )
 text = "1"
 max_length = 2
 __meta__ = {
@@ -2385,7 +2420,7 @@ __meta__ = {
 }
 
 [node name="appear" type="AnimationPlayer" parent="AddDice"]
-anims/appear = SubResource( 23 )
+anims/appear = SubResource( 25 )
 
 [node name="DiceSlider" type="HSlider" parent="AddDice"]
 margin_left = 1.0
@@ -3146,7 +3181,7 @@ __meta__ = {
 [node name="MainMenuL" type="Label" parent="EndScreen/toDesktop"]
 margin_right = 432.0
 margin_bottom = 72.0
-custom_fonts/font = SubResource( 24 )
+custom_fonts/font = SubResource( 26 )
 text = "Exit to Desktop"
 align = 1
 valign = 1
@@ -3169,7 +3204,7 @@ margin_left = -0.950012
 margin_top = 1.65036
 margin_right = 431.05
 margin_bottom = 73.6504
-custom_fonts/font = SubResource( 24 )
+custom_fonts/font = SubResource( 26 )
 text = "Back to Lobby"
 align = 1
 valign = 1
@@ -3178,7 +3213,7 @@ __meta__ = {
 }
 
 [node name="Appear" type="AnimationPlayer" parent="EndScreen"]
-"anims/New Anim" = SubResource( 25 )
+"anims/New Anim" = SubResource( 27 )
 [connection signal="pressed" from="WorldMap/CardHolder" to="." method="_on_CardHolder_pressed"]
 [connection signal="pressed" from="WorldMap/CardHolder/TradeIn" to="." method="_on_TradeIn_pressed"]
 [connection signal="value_changed" from="AddTroops/TroopsSlider" to="." method="_on_TroopsSlider_value_changed"]

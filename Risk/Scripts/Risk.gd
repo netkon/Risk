@@ -94,12 +94,14 @@ func _input(event):
 						if get_node("WorldMap/FadeIn/" + countries[x]).is_pressed() and has_node("WorldMap/FadeIn/" + countries[x] + "/" + str(get_tree().get_network_unique_id())):
 							if countries[x] == pressed:
 								$AddTroops/appear.play_backwards("appear")
+								changeInfo("Your Turn")
 							else:
 								var node = get_node("WorldMap/FadeIn/" + str(countries[x]))
 								$AddTroops.set_position(Vector2(node.get_position().x + (node.get_size().x)/2 , node.get_position().y))
 								$AddTroops/appear.play("appear")
 								$AddTroops/TroopsSlider.max_value = infantry
 								$AddTroops/TroopsSlider.value = 1
+								changeInfo("How many troops do you want to add")
 							changePressed(countries[x])
 
 					
@@ -124,6 +126,7 @@ func _input(event):
 						#$AddTroops/HMTroops.text = str(0)
 						$AddTroops/appear.play_backwards("appear")
 						remoteModulate(pressed , mycolor)
+						changeInfo("Your Turn")
 					
 				elif attackturn == true:
 					if pressed == null:
@@ -211,6 +214,7 @@ func _input(event):
 											$AddTroopsMove/MovekSliderM.value = 1
 											$AddTroopsMove.set_position(Vector2(node.get_position().x + (node.get_size().x)/2 , node.get_position().y))
 											$AddTroopsMove/appear.play("appear")
+											changeInfo("How many troops do you want to send")
 
 									if no == false and int(get_node(("WorldMap/FadeIn/" + countries[x] + "/armycount")).text) > 1:
 										remoteModulate(pressed , mycolor)
@@ -230,6 +234,7 @@ func _input(event):
 						if $AddTroops.is_visible():
 							$AddTroops/appear.play_backwards("appear")
 					changeLabelTurn("Fortify")
+					changeInfo("Your Turn")
 
 					
 				elif $WorldMap/EndTurn.is_pressed() and attackturn == true and timetoattack == false:
@@ -240,6 +245,7 @@ func _input(event):
 						remoteAttackPressed(pressed , get_tree().get_network_unique_id())
 						pressed = null
 					changeLabelTurn("End Turn")
+					changeInfo("Your Turn")
 				
 				elif $WorldMap/EndTurn.is_pressed() and fortifyturn == true:
 					fortifyturn = false
@@ -387,18 +393,13 @@ remote func diceRoll(diceroll , playername , id , color):
 					rolls[j+1] = rolls[j]
 					rolls[j] = temp
 		
-		print("not inverted" + str(rolls))
 		rolls.invert()
-		print("inverted" + str(rolls))
 		for x in GameState.playersingame:
 			if x != get_tree().get_network_unique_id():
 				rpc_id(x , "updateTurnInfo" , rolls)
 		updateTurnInfo(rolls)	
 		
 remote func updateScreenDice(dicenumber , playername , size):	
-	$WorldMap/holdDice.set_size(Vector2(GameState.playersingame.size()*150 , 200))
-	$WorldMap/holdDice.set_position(Vector2(1366/2 - ($WorldMap/holdDice.get_size().x)/2, 768/2 - ($WorldMap/holdDice.get_size().y)/2 - 10) )
-	$WorldMap/holdDice.visible = true
 	var texture = load("res://Textures/Dice/" + str(dicenumber) + ".png")
 	var sprite = Sprite.new()
 	var label = get_node("WorldMap/TempDice/temp").duplicate()
@@ -423,9 +424,11 @@ remote func updateTurnInfo(turns):
 	rolls = turns
 	print("inverted after " + str(rolls))
 	yield(get_tree().create_timer(4), "timeout")
-	$WorldMap/holdDice.visible = false
 	for x in $WorldMap/TempDice.get_children():
 		x.queue_free()
+	$WorldMap/TroopsCount/TroopCount.text = str(infantry)
+	$WorldMap/TroopsCount.visible = true
+	$WorldMap/TroopsCount/appear.play("appear")
 	turnready = true
 	turnChange()
 
@@ -464,8 +467,9 @@ remote func turnChange():
 		pass
 		
 func changeInfo(word):
-	$Info.text = word
-	$Info/fade.play("fade")
+	if $Info.text != word:
+		$Info.text = word
+		$Info/fade.play("fade")
 
 remote func updateTroops(country , number):
 	get_node("WorldMap/FadeIn/" + country + "/armycount").text = str(number)
@@ -664,7 +668,7 @@ func _on_CardHolder_pressed():
 		if cardspressed == false:
 			var count = int(-cardsinhand.size()/2)
 			for x in $WorldMap/CardHolder/CardsInHand.get_children():
-				x.set_position(Vector2(get_tree().get_root().get_size().x/2 + count*50 - (x.get_size().x)/2, 700))
+				x.set_position(Vector2(get_tree().get_root().get_size().x/2 + 2*count*50 - (x.get_size().x)/2, 700))
 				x.visible = true
 				if cardsinhand.size() % 2 == 0:
 					if count == -1:
@@ -721,6 +725,7 @@ func queueFreeCard():
 
 func addInfantry(amount):
 	infantry = infantry + amount
+	$WorldMap/TroopsCount/TroopCount.text = str(infantry)
 
 func _on_MovekSliderM_value_changed(value):
 	if $AddTroopsMove/MovekSliderM.max_value != $AddTroopsMove/MovekSliderM.min_value:
@@ -751,6 +756,7 @@ func _on_OkButtonM_pressed():
 	$AddTroopsMove/appear.play_backwards("appear")
 	remoteModulate(pressed , mycolor)
 	remoteMovePressed(pressed , get_tree().get_network_unique_id())
+	changeInfo("Your Turn")
 	pressed = null
 	pressedmove = null
 	movingdone = true
@@ -764,4 +770,4 @@ func _on_toDesktop_pressed():
 	get_tree().quit()
 
 func _on_MainMenu_pressed():
-	get_tree().get_root().get_node("PreGame").queue_free()
+	get_tree().get_root().get_node("Risk").queue_free()
