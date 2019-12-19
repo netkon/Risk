@@ -447,7 +447,6 @@ remote func turnChange():
 	rolls.remove(0)
 	
 	$Info/fade.play_backwards("fade")
-	yield(get_tree().create_timer(3), "timeout")
 	
 	if whosturn == get_tree().get_network_unique_id():
 		$WorldMap/EndTurn.visible = true
@@ -456,8 +455,16 @@ remote func turnChange():
 		if fasedistribuicao == false:
 			if territories <= 9:
 				addInfantry(3)
+				for x in GameState.playersingame:
+					if x != get_tree().get_network_unique_id():
+						rpc_id(x , "sendTroopsMessage" , GameState.playername , territories , 3)
+				sendTroopsMessage(GameState.playername , territories , 3)
 			else:
 				addInfantry(int(territories/3))
+				for x in GameState.playersingame:
+					if x != get_tree().get_network_unique_id():
+						rpc_id(x , "sendTroopsMessage" , GameState.playername , territories , int(territories/3))
+				sendTroopsMessage(GameState.playername , territories , int(territories/3))
 				
 			print(infantry)
 			placeturn = true
@@ -639,11 +646,18 @@ remote func changeCountryId(id , colors , countrytochange):
 	tempnode.modulate = colors
 	if int(tempnode.get_children()[2].name) == get_tree().get_network_unique_id():
 		territories = territories - 1
-		if territories == 0:
+		if territories == 0 and GameState.playersingame.size() == 2:
 			for x in GameState.playersingame:
 				if x != get_tree().get_network_unique_id():
 					rpc_id(x , "endGame" )
 			endGame()
+		elif territories == 0 and GameState.playersingame.size() > 2:
+			for x in GameState.playersingame:
+				if x != get_tree().get_network_unique_id():
+					rpc_id(x , "removePlayer" , get_tree().get_network_unique_id())
+			removePlayer(get_tree().get_network_unique_id())
+			endGame()
+			
 	tempnode.get_children()[2].name = str(id)
 	
 func _on_OkButtonA_pressed():
@@ -771,3 +785,10 @@ func _on_toDesktop_pressed():
 
 func _on_MainMenu_pressed():
 	get_tree().get_root().get_node("Risk").queue_free()
+
+remote func sendTroopsMessage(name , noterri , notroops):
+		$Turn/InfoChange.text = name + " got " + str(notroops) + " troops due to having " + str(noterri) + " territories"
+
+remote func removePlayer(id):
+	GameState.playersingame.erase(id)
+	rolls["id"].erase(id)
